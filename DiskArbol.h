@@ -8,10 +8,21 @@
 #ifndef DISKARBOL_H_
 #define DISKARBOL_H_
 
+#include <iostream>
+#include <fstream>
+#include <cstring>
+
 class DiskArbol {
+private:
+	std::fstream archivo;
 public:
 	DiskArbol();
+	bool insertar(int datoAInsertar);
+	bool eliminar(int datoAEliminar);
+	bool consultar(int datoAConsultar);
+	void imprimir();
 	virtual ~DiskArbol();
 };
+
 
 #endif /* DISKARBOL_H_ */

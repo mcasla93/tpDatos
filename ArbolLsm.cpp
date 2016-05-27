@@ -12,24 +12,31 @@ ArbolLsm::ArbolLsm() {
 
 void ArbolLsm::insertar(int datoAInsertar) {
 	if (!this->c0.insertar(datoAInsertar)) {
-		//ver el tema de insertar en c1 si falla c0
+		if (!this->c1.insertar(datoAInsertar)){
+			//si entra aca es xq es dato duplicado
+		}
 	}
 }
 
 void ArbolLsm::eliminar(int datoAEliminar) {
 	if (!this->c0.eliminar(datoAEliminar)) {
-			//ver el tema de eliminar en c1 si falla c0
+		if (!this->c1.eliminar(datoAEliminar)){
+			//si entra aca es xq no existe el dato a borrar
 		}
+	}
 }
 
 void ArbolLsm::consultar(int datoAConsultar) {
 	if (!this->c0.consultar(datoAConsultar)) {
-			//ver el tema de consultar en c1 si falla c0
+		if (!this->c1.consultar(datoAConsultar)){
+			//si entra aca es xq no existe el dato a consultar
 		}
+	}
 }
 
 void ArbolLsm::imprimir() {
 	c0.imprimir();
+	c1.imprimir();
 }
 
 ArbolLsm::~ArbolLsm() {
