@@ -10,10 +10,12 @@
 
 #include "Dato.h"
 #include "MemArbol.h"
+#include "DiskArbol.h"
 
 class ArbolLsm {
 private:
 	MemArbol c0;
+	DiskArbol c1;
 public:
 	ArbolLsm();
 	void insertar(int datoAInsertar);
