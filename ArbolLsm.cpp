@@ -29,7 +29,7 @@ void ArbolLsm::eliminar(int datoAEliminar) {
 void ArbolLsm::consultar(int datoAConsultar) {
 	if (!this->c0.consultar(datoAConsultar)) {
 		if (!this->c1.consultar(datoAConsultar)){
-			//si entra aca es xq no existe el dato a consultar
+			//si entra aca es xq no existe el dato a consultar me oiste
 		}
 	}
 }
