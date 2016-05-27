@@ -14,7 +14,7 @@ void ArbolLsm::insertar(int datoAInsertar) {
 	if (!this->c0.insertar(datoAInsertar)) {
 		if (!this->c1.insertar(datoAInsertar)){
 			//si entra aca es xq es dato duplicado
-		}
+		}//asdasdasd
 	}
 }
 
