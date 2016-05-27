@@ -12,7 +12,6 @@
 using namespace std;
 
 int main() {
-
 	ArbolLsm arbol;
 
 	arbol.insertar(6);

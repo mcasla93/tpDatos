@@ -6,8 +6,12 @@
  */
 
 #include "ArbolLsm.h"
+#include "MemArbol.h"
+#include "DiskArbol.h"
 
 ArbolLsm::ArbolLsm() {
+	/*this->c0 = new MemArbol;
+	this->c1 = new DiskArbol;*/
 }
 
 void ArbolLsm::insertar(int datoAInsertar) {

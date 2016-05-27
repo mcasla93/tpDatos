@@ -8,7 +8,7 @@
 #include "MemArbol.h"
 
 MemArbol::MemArbol() {
-	//this->arbol = new Btree;
+	this->arbol = new Btree;
 }
 
 bool MemArbol::insertar(int datoAInsertar) {

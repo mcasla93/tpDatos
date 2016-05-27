@@ -11,7 +11,6 @@
 using namespace std;
 
 DiskArbol::DiskArbol() {
-	// TODO Auto-generated constructor stub
 
 }
 
