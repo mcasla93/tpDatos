@@ -40,8 +40,8 @@ bool DiskArbol::consultar(int datoAConsultar) {
 }
 
 void DiskArbol::imprimir() {
-	//this->archivo.close();
-	//this->archivo.open(RUTA.c_str(),ifstream::in);
+	this->archivo.close();
+	this->archivo.open(RUTA.c_str(),ifstream::in);
 	//this->archivo.seekg(0,ios_base::beg);
 
 	while(!this->archivo.eof()) {
