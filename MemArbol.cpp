@@ -11,18 +11,18 @@ MemArbol::MemArbol() {
 
 }
 
-bool MemArbol::insertar(int datoAInsertar) {
+bool MemArbol::insertar(Dato datoAInsertar) {
 	this->arbol.insertar(datoAInsertar);
 	return true;
 }
 
 bool MemArbol::eliminar(int datoAEliminar) {
-	this->arbol.remover(datoAEliminar);
+	//this->arbol.remover(datoAEliminar);
 	return true;
 }
 
 bool MemArbol::consultar(int datoAConsultar) {
-	this->arbol.buscar(datoAConsultar);
+	//this->arbol.buscar(datoAConsultar);
 	return true;
 }
 

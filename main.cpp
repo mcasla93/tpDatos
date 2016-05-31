@@ -13,10 +13,20 @@ using namespace std;
 
 int main() {
 	ArbolLsm arbol;
+	Dato dato;
 
-	arbol.insertar(6);
-	arbol.insertar(58);
-	arbol.insertar(9);
+	char* cod = "2";
+	char* desc = "pablito";
+	dato.cargar(1,cod,desc);
+	arbol.insertar(dato);
+
+	cod = "3";
+	desc = "matu";
+	dato.cargar(2,cod,desc);
+	arbol.insertar(dato);
+
+	//arbol.insertar(58);
+	//arbol.insertar(9);
 
 	arbol.imprimir();
 

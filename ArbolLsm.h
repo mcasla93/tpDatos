@@ -14,11 +14,11 @@
 
 class ArbolLsm {
 private:
-	//MemArbol c0;
+	MemArbol c0;
 	DiskArbol c1;
 public:
 	ArbolLsm();
-	void insertar(int datoAInsertar);
+	void insertar(Dato datoAInsertar);
 	void eliminar(int datoAEliminar);
 	void consultar(int datoAConsultar);
 	void imprimir();

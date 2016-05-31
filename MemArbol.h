@@ -17,10 +17,10 @@ using namespace std;
 
 class MemArbol {
 private:
-	Btree<int,5> arbol;
+	Btree<Dato,5> arbol;
 public:
 	MemArbol();
-	bool insertar(int datoAInsertar);
+	bool insertar(Dato datoAInsertar);
 	bool eliminar(int datoAEliminar);
 	bool consultar(int datoAConsultar);
 	void imprimir();

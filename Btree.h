@@ -10,9 +10,9 @@ using namespace std;
 template <class Type, int order> class Btree {
 
 protected: // dato members
-	B_node<Dato, order> *root;
+	B_node<Type, order> *root;
 private:
-	void recInorder(B_node<Dato, order> * current );
+	void recInorder(B_node<Type, order> * current );
 	bool  Encontrar( B_node<Type, order> *current, Type &target);
 
 public: // publics.
@@ -22,9 +22,9 @@ public: // publics.
 	bool buscar( Type &searchitem );
 	void mostrarArbol();
 	// insertion
-	bool buscarEnNodo( B_node<Type, order> *current, const Type &target, int &position );
-	void insertar(const Type &new_entry);
-	void insertarEnRecursion( B_node<Type, order> *current, const Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result );
+	bool buscarEnNodo( B_node<Type, order> *current, Type &target, int &position );
+	void insertar(Type &new_entry);
+	void insertarEnRecursion( B_node<Type, order> *current, Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result );
 	void insertarEnNodo(B_node<Type, order> *current, const Type &entry, B_node<Type, order> *rightchilds, int position);
 	void dividirNodo( B_node<Type, order> *current,  const Type &extra_entry,   B_node<Type, order> *extra_childs,  int position, 
 		B_node<Type, order> * &right_half,   Type &median);
@@ -81,16 +81,16 @@ template <class Type, int order> bool Btree<Type,order>::Encontrar( B_node<Type,
 }
 
 
-template <class Type, int order> bool Btree<Type,order>::buscarEnNodo( B_node<Type, order> *current, const Type &target, int &position ){
+template <class Type, int order> bool Btree<Type,order>::buscarEnNodo( B_node<Type, order> *current, Type &target, int &position ){
 	position=0;
-	while (position < current->count && target > current->data[position])
+	while ((position < current->count) && (target.identificador() > current->data[position].identificador()))
 		position++; 
-	if (position < current->count && target == current->data[position])
+	if ((position < current->count) && (target.identificador() == current->data[position].identificador()))
 		return true;
 	else
 		return false;
 }
-template <class Type, int order> void Btree<Type,order>::insertar(const Type &new_entry){
+template <class Type, int order> void Btree<Type,order>::insertar(Type &new_entry){
 	Type median;
 	B_node<Type, order> *rightchilds, *new_root;
 	bool  result ; 
@@ -105,7 +105,7 @@ template <class Type, int order> void Btree<Type,order>::insertar(const Type &ne
 	}
 }
 template <class Type, int order> void Btree<Type,order>::insertarEnRecursion( B_node<Type, order> *current,
-	const Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result ){
+	Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result ){
 
 		int position;
 		if (current == NULL) {

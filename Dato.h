@@ -16,7 +16,10 @@ private:
 	char codigo[3];
 	char descripcion[1000];
 public:
-	Dato(int id,char codigo[3],char descripcion[1000]);
+	Dato();
+	void cargar(int id,char codigo[3],char descripcion[1000]);
+	int identificador();
+	void imprimir();
 	virtual ~Dato();
 };
 

@@ -37,8 +37,8 @@ template<  class Type, int order > bool B_node< Type, order>::NodeEmpty() const 
 template< class Type, int order > void B_node< Type,order>::mostrarNodo() { 
 	
 	for(int i=0; i< this->count ;i++) 
-		cout <<"\t"<< data[i]<<", "; 
-	
+		//cout <<"\t"<< data[i]<<", ";
+		data[i].imprimir();
 	cout <<"\n"; 
 	
 }
