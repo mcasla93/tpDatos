@@ -14,7 +14,7 @@
 
 class ArbolLsm {
 private:
-	MemArbol c0;
+	//MemArbol c0;
 	DiskArbol c1;
 public:
 	ArbolLsm();

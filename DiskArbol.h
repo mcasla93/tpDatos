@@ -12,6 +12,8 @@
 #include <fstream>
 #include <cstring>
 
+const std::string RUTA = "diskArbol.txt";
+
 class DiskArbol {
 private:
 	std::fstream archivo;
