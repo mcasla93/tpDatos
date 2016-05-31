@@ -10,9 +10,9 @@ using namespace std;
 template <class Type, int order> class Btree {
 
 protected: // dato members
-	B_node<Type, order> *root;
+	B_node<Dato, order> *root;
 private:
-	void recInorder(B_node<Type, order> * current );
+	void recInorder(B_node<Dato, order> * current );
 	bool  Encontrar( B_node<Type, order> *current, Type &target);
 
 public: // publics.
