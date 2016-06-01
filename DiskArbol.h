@@ -8,6 +8,7 @@
 #ifndef DISKARBOL_H_
 #define DISKARBOL_H_
 
+#include "Dato.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -19,9 +20,9 @@ private:
 	std::fstream archivo;
 public:
 	DiskArbol();
-	bool insertar(int datoAInsertar);
-	bool eliminar(int datoAEliminar);
-	bool consultar(int datoAConsultar);
+	bool insertar(Dato datoAInsertar);
+	bool eliminar(Dato datoAEliminar);
+	bool consultar(Dato datoAConsultar);
 	void imprimir();
 	virtual ~DiskArbol();
 };

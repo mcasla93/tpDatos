@@ -17,21 +17,21 @@ DiskArbol::DiskArbol() {
 	this->archivo.close();
 }
 
-bool DiskArbol::insertar(int datoAInsertar) {
+bool DiskArbol::insertar(Dato datoAInsertar) {
 	ofstream escritura("diskArbol.txt",ios::app);
 	escritura << datoAInsertar << endl;
 	escritura.close();
 	return true;
 }
 
-bool DiskArbol::eliminar(int datoAEliminar) {
+bool DiskArbol::eliminar(Dato datoAEliminar) {
 	//this->archivo.open("diskArbol.info");
 	// procedimiento para eliminar del archivo
 	//this->archivo.close();
 	return true;
 }
 
-bool DiskArbol::consultar(int datoAConsultar) {
+bool DiskArbol::consultar(Dato datoAConsultar) {
 	//this->archivo.open("diskArbol.info");
 	// procedimiento para buscar en archivo
 	//this->archivo.close();
@@ -42,11 +42,11 @@ void DiskArbol::imprimir() {
 	ifstream lectura("diskArbol.txt");
 
 	while(!lectura.eof()) {
-		int dato;
+		Dato dato;
 		lectura >> dato;
 		if(lectura.eof())
 			break;
-		cout << dato << endl;
+		cout << dato.imprimir() << endl;
 	}
 
 	lectura.close();

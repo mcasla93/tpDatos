@@ -11,18 +11,18 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
 	ArbolLsm arbol;
 	Dato dato;
 
 	char* cod = "2";
 	char* desc = "pablito";
-	dato.cargar(1,cod,desc);
+	dato.cargar(2,cod,desc);
 	arbol.insertar(dato);
 
 	cod = "3";
 	desc = "matu";
-	dato.cargar(2,cod,desc);
+	dato.cargar(1,cod,desc);
 	arbol.insertar(dato);
 
 	//arbol.insertar(58);

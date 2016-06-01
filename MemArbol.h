@@ -21,8 +21,8 @@ private:
 public:
 	MemArbol();
 	bool insertar(Dato datoAInsertar);
-	bool eliminar(int datoAEliminar);
-	bool consultar(int datoAConsultar);
+	bool eliminar(Dato datoAEliminar);
+	bool consultar(Dato datoAConsultar);
 	void imprimir();
 	virtual ~MemArbol();
 };

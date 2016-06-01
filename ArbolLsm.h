@@ -19,8 +19,8 @@ private:
 public:
 	ArbolLsm();
 	void insertar(Dato datoAInsertar);
-	void eliminar(int datoAEliminar);
-	void consultar(int datoAConsultar);
+	void eliminar(Dato datoAEliminar);
+	void consultar(Dato datoAConsultar);
 	void imprimir();
 	virtual ~ArbolLsm();
 };
