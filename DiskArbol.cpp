@@ -17,7 +17,7 @@ DiskArbol::DiskArbol() {
 	this->archivo.close();
 }
 
-bool DiskArbol::insertar(Dato datoAInsertar) {
+bool DiskArbol::insertar(struct Dato datoAInsertar) {
 	ofstream escritura("diskArbol.txt",ios::app);
 	escritura << datoAInsertar << endl;
 	escritura.close();

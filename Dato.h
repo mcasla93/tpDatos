@@ -10,17 +10,18 @@
 
 #include <string>
 
-class Dato {
-private:
+
+    struct Dato {
 	int id;
 	char codigo[3];
 	char descripcion[1000];
-public:
-	Dato();
-	void cargar(int id,char codigo[3],char descripcion[1000]);
-	int identificador();
-	void imprimir();
-	virtual ~Dato();
-};
+	void guardar(int id, char codigo[], char desc[]) {
+		this->id = id;
+		this->codigo= codigo;
+		this->descripcion=desc;
+	}
+
+    } dato;
+
 
 #endif /* DATO_H_ */
