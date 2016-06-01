@@ -13,14 +13,17 @@ using namespace std;
 
 DiskArbol::DiskArbol() {
 	// CREAR ARCHIVO
-	this->archivo.open(RUTA.c_str(),ofstream::out);
+	this->archivo.open(RUTAARCHIVO.c_str(),ofstream::out);
 	this->archivo.close();
 }
 
 bool DiskArbol::insertar(struct Dato datoAInsertar) {
-	ofstream escritura("diskArbol.txt",ios::app);
-	escritura << datoAInsertar << endl;
+	ofstream escritura(RUTAARCHIVO.c_str(),ios::app);
+
+	escritura.write(reinterpret_cast<char *>(&datoAInsertar),sizeof(struct Dato));
+
 	escritura.close();
+
 	return true;
 }
 
@@ -39,14 +42,16 @@ bool DiskArbol::consultar(Dato datoAConsultar) {
 }
 
 void DiskArbol::imprimir() {
-	ifstream lectura("diskArbol.txt");
+	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
 
 	while(!lectura.eof()) {
 		Dato dato;
-		lectura >> dato;
+		lectura.read(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+
 		if(lectura.eof())
 			break;
-		cout << dato.imprimir() << endl;
+
+		dato.imprimir();
 	}
 
 	lectura.close();

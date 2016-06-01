@@ -30,8 +30,8 @@ public: // publics.
 		B_node<Type, order> * &right_half,   Type &median);
 	// eliminacion
 
-	void remover( const Type &target );
-	void removerEnRecursion( B_node<Type, order> *current, const Type &target );
+	void remover( Type &target );
+	void removerEnRecursion( B_node<Type, order> *current, Type &target );
 	void removerDato(  B_node<Type, order> *current, int position  );
 	void copiarDePredecesor(  B_node<Type, order> *current, int position );
 	// funciones para restaurar despues de la eliminacion
@@ -177,7 +177,7 @@ template <class Type, int order> void Btree<Type,order>::dividirNodo( B_node<Typ
 		current->count--;
 }
 
-template <class Type, int order> void Btree<Type,order>::remover( const Type &target ){
+template <class Type, int order> void Btree<Type,order>::remover( Type &target ){
 
 	removerEnRecursion( root , target );
 	if( root != NULL && root->count == 0 ){
@@ -186,7 +186,7 @@ template <class Type, int order> void Btree<Type,order>::remover( const Type &ta
 		delete delete_root;
 	}
 }
-template <class Type, int order> void Btree<Type,order>::removerEnRecursion( B_node<Type, order> *current, const Type &target ){
+template <class Type, int order> void Btree<Type,order>::removerEnRecursion( B_node<Type, order> *current, Type &target ){
 
 	int position;
 	if( current == NULL ){

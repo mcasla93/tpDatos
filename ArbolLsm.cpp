@@ -13,11 +13,11 @@ ArbolLsm::ArbolLsm() {
 }
 
 void ArbolLsm::insertar(Dato datoAInsertar) {
-	if (!this->c0.insertar(datoAInsertar)) {
+	//if (!this->c0.insertar(datoAInsertar)) {
 		if (!this->c1.insertar(datoAInsertar)){
 			//si entra aca es xq es dato duplicado
 		}
-	}
+	//}
 }
 
 void ArbolLsm::eliminar(Dato datoAEliminar) {
@@ -37,7 +37,7 @@ void ArbolLsm::consultar(Dato datoAConsultar) {
 }
 
 void ArbolLsm::imprimir() {
-	c0.imprimir();
+	//c0.imprimir();
 	c1.imprimir();
 }
 

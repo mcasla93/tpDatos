@@ -13,7 +13,7 @@
 #include <fstream>
 #include <cstring>
 
-const std::string RUTA = "diskArbol.txt";
+const std::string RUTAARCHIVO = "diskArbol.dat";
 
 class DiskArbol {
 private:

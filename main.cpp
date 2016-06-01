@@ -15,18 +15,11 @@ int main(int argc, char *argv[]) {
 	ArbolLsm arbol;
 	Dato dato;
 
-	char* cod = "2";
-	char* desc = "pablito";
-	dato.cargar(2,cod,desc);
+	dato.cargar(2,"2","pablito");
 	arbol.insertar(dato);
 
-	cod = "3";
-	desc = "matu";
-	dato.cargar(1,cod,desc);
+	dato.cargar(1,"3","matu");
 	arbol.insertar(dato);
-
-	//arbol.insertar(58);
-	//arbol.insertar(9);
 
 	arbol.imprimir();
 
