@@ -30,6 +30,25 @@ bool MemArbol::consultarId(int idAConsultar) {
 	return true;
 }
 
+bool MemArbol::consultarCodigo(char codigoAConsultar[3]) {
+	/*Dato datoConsultado;
+	if (this->arbol.buscarId(codigoAConsultar, &datoConsultado)){
+		datoConsultado.imprimir();
+		cout << "encontre" << endl;
+	}*/
+	return true;
+}
+
+bool MemArbol::consultarDescripcion(char descripcionAConsultar[1000]) {
+	/*Dato datoConsultado;
+	if (this->arbol.buscarId(descripcionAConsultar, &datoConsultado)){
+		datoConsultado.imprimir();
+		cout << "encontre" << endl;
+	}*/
+	return true;
+}
+
+
 void MemArbol::imprimir() {
 	this->arbol.mostrarArbol();
 }

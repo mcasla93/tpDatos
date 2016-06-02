@@ -36,6 +36,22 @@ void ArbolLsm::consultarId(int datoAConsultar) {
 	}
 }
 
+void ArbolLsm::consultarCodigo(char codigoAConsultar[3]) {
+	if (!this->c0.consultarCodigo(codigoAConsultar)) {
+		//if (!this->c1.consultar(datoAConsultar)){
+			//si entra aca es xq no existe el dato a consultar me oiste
+		//}
+	}
+}
+
+void ArbolLsm::consultarDescripcion(char descripcionAConsultar[1000]) {
+	if (!this->c0.consultarDescripcion(descripcionAConsultar)) {
+		//if (!this->c1.consultar(datoAConsultar)){
+			//si entra aca es xq no existe el dato a consultar me oiste
+		//}
+	}
+}
+
 void ArbolLsm::imprimir() {
 	//c0.imprimir();
 	c1.imprimir();
