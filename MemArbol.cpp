@@ -21,8 +21,12 @@ bool MemArbol::eliminar(Dato datoAEliminar) {
 	return true;
 }
 
-bool MemArbol::consultar(Dato datoAConsultar) {
-	this->arbol.buscar(datoAConsultar);
+bool MemArbol::consultarId(int idAConsultar) {
+	Dato datoConsultado;
+	if (this->arbol.buscarId(idAConsultar, &datoConsultado)){
+		datoConsultado.imprimir();
+		cout << "encontre" << endl;
+	}
 	return true;
 }
 

@@ -13,11 +13,11 @@ ArbolLsm::ArbolLsm() {
 }
 
 void ArbolLsm::insertar(Dato datoAInsertar) {
-	//if (!this->c0.insertar(datoAInsertar)) {
+	if (!this->c0.insertar(datoAInsertar)) {
 		if (!this->c1.insertar(datoAInsertar)){
 			//si entra aca es xq es dato duplicado
 		}
-	//}
+	}
 }
 
 void ArbolLsm::eliminar(Dato datoAEliminar) {
@@ -28,11 +28,11 @@ void ArbolLsm::eliminar(Dato datoAEliminar) {
 	}
 }
 
-void ArbolLsm::consultar(Dato datoAConsultar) {
-	if (!this->c0.consultar(datoAConsultar)) {
-		if (!this->c1.consultar(datoAConsultar)){
+void ArbolLsm::consultarId(int datoAConsultar) {
+	if (!this->c0.consultarId(datoAConsultar)) {
+		//if (!this->c1.consultar(datoAConsultar)){
 			//si entra aca es xq no existe el dato a consultar me oiste
-		}
+		//}
 	}
 }
 

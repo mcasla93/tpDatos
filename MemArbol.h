@@ -22,7 +22,7 @@ public:
 	MemArbol();
 	bool insertar(Dato datoAInsertar);
 	bool eliminar(Dato datoAEliminar);
-	bool consultar(Dato datoAConsultar);
+	bool consultarId(int idAConsultar);
 	void imprimir();
 	virtual ~MemArbol();
 };

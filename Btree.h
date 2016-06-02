@@ -14,12 +14,15 @@ protected: // dato members
 private:
 	void recInorder(B_node<Type, order> * current );
 	bool  Encontrar( B_node<Type, order> *current, Type &target);
+	bool  EncontrarId( B_node<Type, order> *current, int idConsultado, Type *datoConsultado);
 
 public: // publics.
 	Btree();
 	// travesling
 	void inOrder();
 	bool buscar( Type &searchitem );
+	bool buscarId( int idConsultado, Type *datoConsultado );
+	bool buscarIdEnNodo(B_node<Type, order> *current, int idConsultado,int &position);
 	void mostrarArbol();
 	// insertion
 	bool buscarEnNodo( B_node<Type, order> *current, Type &target, int &position );
@@ -62,12 +65,16 @@ template <class Type, int order> void Btree<Type,order>::recInorder(B_node<Type,
 		}
 	}
 }
+
 template <class Type, int order> bool Btree<Type,order>::buscar( Type &searchitem ){
-	
 	return Encontrar( root , searchitem );
 }
+
+template <class Type, int order> bool Btree<Type,order>::buscarId(int idConsultado, Type *datoConsultado){
+	return EncontrarId( root , idConsultado, datoConsultado );
+}
+
 template <class Type, int order> bool Btree<Type,order>::Encontrar( B_node<Type, order> *current, Type &target ){
-	
 	bool result = false;
 	int position;
 	if (current != NULL) {
@@ -80,6 +87,20 @@ template <class Type, int order> bool Btree<Type,order>::Encontrar( B_node<Type,
 	return result;
 }
 
+template <class Type, int order> bool Btree<Type,order>::EncontrarId(B_node<Type,order> *current,int idConsultado,Type *datoConsultado){
+	bool result = false;
+	int position;
+	if (current != NULL) {
+		result = buscarIdEnNodo(current, idConsultado, position);
+		if (result == false)
+			result = EncontrarId(current->childs[position], idConsultado, datoConsultado);
+		else{
+			datoConsultado->cargar(current->data[position].id, current->data[position].codigo, current->data[position].descripcion);
+			//esto guarda en datoConsultado el dato consultado del arbol.
+		}
+	}
+	return result;
+}
 
 template <class Type, int order> bool Btree<Type,order>::buscarEnNodo( B_node<Type, order> *current, Type &target, int &position ){
 	position=0;
@@ -90,6 +111,17 @@ template <class Type, int order> bool Btree<Type,order>::buscarEnNodo( B_node<Ty
 	else
 		return false;
 }
+
+template <class Type, int order> bool Btree<Type,order>::buscarIdEnNodo(B_node<Type, order> *current,int idConsultado,int &position){
+	position=0;
+	while ((position < current->count) && (idConsultado > current->data[position].id))
+		position++;
+	if ((position < current->count) && (idConsultado == current->data[position].id)){
+		return true;
+	}else
+		return false;
+}
+
 template <class Type, int order> void Btree<Type,order>::insertar(Type &new_entry){
 	Type median;
 	B_node<Type, order> *rightchilds, *new_root;

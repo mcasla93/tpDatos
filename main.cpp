@@ -21,7 +21,9 @@ int main(int argc, char *argv[]) {
 	dato.cargar(1,"3","matu");
 	arbol.insertar(dato);
 
-	arbol.imprimir();
+	arbol.consultarId(2);
+	arbol.consultarCodigo("2");
+	arbol.consultarDescripcion("pablito");
 
 	return 0;
 }
