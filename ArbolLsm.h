@@ -8,6 +8,7 @@
 #ifndef ARBOLLSM_H_
 #define ARBOLLSM_H_
 
+#include <iostream>
 #include "MemArbol.h"
 #include "DiskArbol.h"
 

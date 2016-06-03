@@ -25,29 +25,38 @@ bool MemArbol::consultarId(int idAConsultar) {
 	Dato datoConsultado;
 	if (this->arbol.buscarId(idAConsultar, &datoConsultado)){
 		datoConsultado.imprimir();
-		cout << "encontre" << endl;
+		cout << endl;
+		return true;
+	}else{
+		cout << "id no encontrado" << endl;
+		return false;
 	}
-	return true;
 }
 
 bool MemArbol::consultarCodigo(char codigoAConsultar[3]) {
-	/*Dato datoConsultado;
-	if (this->arbol.buscarId(codigoAConsultar, &datoConsultado)){
+	Dato datoConsultado;
+	if (this->arbol.buscarCodigo(codigoAConsultar, &datoConsultado)){
 		datoConsultado.imprimir();
-		cout << "encontre" << endl;
-	}*/
-	return true;
+		cout << endl;
+		return true;
+	}else{
+		cout << "codigo no encontrado" << endl;
+		return false;
+	}
+
 }
 
 bool MemArbol::consultarDescripcion(char descripcionAConsultar[1000]) {
-	/*Dato datoConsultado;
-	if (this->arbol.buscarId(descripcionAConsultar, &datoConsultado)){
+	Dato datoConsultado;
+	if (this->arbol.buscarDescripcion(descripcionAConsultar, &datoConsultado)){
 		datoConsultado.imprimir();
-		cout << "encontre" << endl;
-	}*/
-	return true;
+		cout << endl;
+		return true;
+	}else{
+		cout << "descripcion no encontrado" << endl;
+		return false;
+	}
 }
-
 
 void MemArbol::imprimir() {
 	this->arbol.mostrarArbol();

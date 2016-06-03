@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cstddef>
 #include <cstdlib>
+#include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
@@ -13,8 +15,10 @@ protected: // dato members
 	B_node<Type, order> *root;
 private:
 	void recInorder(B_node<Type, order> * current );
-	bool  Encontrar( B_node<Type, order> *current, Type &target);
-	bool  EncontrarId( B_node<Type, order> *current, int idConsultado, Type *datoConsultado);
+	bool Encontrar( B_node<Type, order> *current, Type &target);
+	bool EncontrarId( B_node<Type, order> *current, int idConsultado, Type *datoConsultado);
+	bool EncontrarCodigo( B_node<Type, order> *current, char codigoConsultado[3], Type *datoConsultado);
+	bool EncontrarDescripcion( B_node<Type, order> *current, char descripcionConsultada[1000], Type *datoConsultado);
 
 public: // publics.
 	Btree();
@@ -23,6 +27,8 @@ public: // publics.
 	bool buscar( Type &searchitem );
 	bool buscarId( int idConsultado, Type *datoConsultado );
 	bool buscarIdEnNodo(B_node<Type, order> *current, int idConsultado,int &position);
+	bool buscarCodigo( char codigoConsultado[3], Type *datoConsultado );
+	bool buscarDescripcion( char descripcionConsultada[1000], Type *datoConsultado );
 	void mostrarArbol();
 	// insertion
 	bool buscarEnNodo( B_node<Type, order> *current, Type &target, int &position );
@@ -60,7 +66,7 @@ template <class Type, int order> void Btree<Type,order>::recInorder(B_node<Type,
 		recInorder( current->childs[0]);
 		for (int i = 0; i < current->count; i++)
 		{
-			cout << current->data[i] << " ";
+			current->data[i].imprimir();
 			recInorder(current->childs[i + 1]);
 		}
 	}
@@ -72,6 +78,14 @@ template <class Type, int order> bool Btree<Type,order>::buscar( Type &searchite
 
 template <class Type, int order> bool Btree<Type,order>::buscarId(int idConsultado, Type *datoConsultado){
 	return EncontrarId( root , idConsultado, datoConsultado );
+}
+
+template <class Type, int order> bool Btree<Type,order>::buscarCodigo(char codigoConsultado[3], Type *datoConsultado){
+	return EncontrarCodigo( root , codigoConsultado, datoConsultado );
+}
+
+template <class Type, int order> bool Btree<Type,order>::buscarDescripcion(char descripcionConsultada[1000], Type *datoConsultado){
+	return EncontrarDescripcion( root , descripcionConsultada, datoConsultado );
 }
 
 template <class Type, int order> bool Btree<Type,order>::Encontrar( B_node<Type, order> *current, Type &target ){
@@ -97,6 +111,40 @@ template <class Type, int order> bool Btree<Type,order>::EncontrarId(B_node<Type
 		else{
 			datoConsultado->cargar(current->data[position].id, current->data[position].codigo, current->data[position].descripcion);
 			//esto guarda en datoConsultado el dato consultado del arbol.
+		}
+	}
+	return result;
+}
+
+template <class Type, int order> bool Btree<Type,order>::EncontrarCodigo(B_node<Type,order> *current, char codigoConsultado[3],Type *datoConsultado){
+	bool result = false;
+
+	if (current != NULL){
+		recInorder(current->childs[0]);
+		for (int i = 0; i < current->count; i++){
+			if (strcmp(codigoConsultado,current->data[i].codigo)==0){
+				datoConsultado->cargar(current->data[i].id, current->data[i].codigo, current->data[i].descripcion);
+				result = true;
+				break;
+			}
+			recInorder(current->childs[i + 1]);
+		}
+	}
+	return result;
+}
+
+template <class Type, int order> bool Btree<Type,order>::EncontrarDescripcion(B_node<Type,order> *current, char descripcionConsultada[1000],Type *datoConsultado){
+	bool result = false;
+
+	if (current != NULL){
+		recInorder(current->childs[0]);
+		for (int i = 0; i < current->count; i++){
+			if (strcmp(descripcionConsultada,current->data[i].descripcion)==0){
+				datoConsultado->cargar(current->data[i].id, current->data[i].codigo, current->data[i].descripcion);
+				result = true;
+				break;
+			}
+			recInorder(current->childs[i + 1]);
 		}
 	}
 	return result;
@@ -136,6 +184,7 @@ template <class Type, int order> void Btree<Type,order>::insertar(Type &new_entr
 		root = new_root;
 	}
 }
+
 template <class Type, int order> void Btree<Type,order>::insertarEnRecursion( B_node<Type, order> *current,
 	Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result ){
 
@@ -170,6 +219,7 @@ template <class Type, int order> void Btree<Type,order>::insertarEnRecursion( B_
 			}
 		}
 }
+
 template <class Type, int order> void Btree<Type,order>::insertarEnNodo(B_node<Type, order> *current,
 	const Type &entry, B_node<Type, order> *rightchilds, int position){
 		int i; 
@@ -181,6 +231,7 @@ template <class Type, int order> void Btree<Type,order>::insertarEnNodo(B_node<T
 		current->childs[i+2]=rightchilds ;
 		current->count++;
 }
+
 template <class Type, int order> void Btree<Type,order>::dividirNodo( B_node<Type, order> *current,  const Type &extra_entry,   B_node<Type, order> *extra_childs,  int position, 
 	B_node<Type, order> * &right_half,   Type &median){
 
@@ -218,6 +269,7 @@ template <class Type, int order> void Btree<Type,order>::remover( Type &target )
 		delete delete_root;
 	}
 }
+
 template <class Type, int order> void Btree<Type,order>::removerEnRecursion( B_node<Type, order> *current, Type &target ){
 
 	int position;
@@ -250,6 +302,7 @@ template <class Type, int order> void Btree<Type,order>::removerDato(  B_node<Ty
 		current->data[i] = current->data[i+1];
 	current->count--;
 }
+
 template <class Type, int order> void Btree<Type,order>::copiarDePredecesor(  B_node<Type, order> *current, int position ){
 
 	B_node<Type, order> * leaf = current->childs[position];
@@ -352,6 +405,7 @@ template <class Type, int order> void Btree<Type,order>::imprimirArbol( B_node<T
 	for( i=0; i<= current->count ;i++) 
 		imprimirArbol( current->childs[i] );
 }
+
 template <class Type, int order> void Btree<Type,order>::mostrarArbol(){
 	
 	if ( root == NULL ) 
@@ -361,6 +415,5 @@ template <class Type, int order> void Btree<Type,order>::mostrarArbol(){
 		imprimirArbol( root );
 	} 
 }
-
 
 #endif
