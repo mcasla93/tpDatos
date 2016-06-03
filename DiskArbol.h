@@ -22,7 +22,9 @@ public:
 	DiskArbol();
 	bool insertar(Dato datoAInsertar);
 	bool eliminar(Dato datoAEliminar);
-	bool consultar(Dato datoAConsultar);
+	bool consultarId(int idAConsultar);
+	bool consultarCodigo(char codigoAConsultar[3]);
+	bool consultarDescripcion(char descripcionAConsultar[1000]);
 	void imprimir();
 	virtual ~DiskArbol();
 };

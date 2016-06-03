@@ -21,9 +21,9 @@ int main(int argc, char *argv[]) {
 	dato.cargar(1,"3","matu");
 	arbol.insertar(dato);
 
-	arbol.consultarId(1);
+	arbol.consultarId(2);
 	arbol.consultarCodigo("3");
-	arbol.consultarDescripcion("matu");
+	arbol.consultarDescripcion("pablo");
 
 	return 0;
 }
