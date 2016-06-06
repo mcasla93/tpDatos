@@ -21,8 +21,10 @@ int main(int argc, char *argv[]) {
 	arbol.insertar(dato);
 
 	dato = arbol.consultarDescripcion("pablo");
-	arbol.eliminar(dato);
+	Dato datoNuevo;
+	datoNuevo.cargar(dato.id,"22","descr nueva");
 
+	arbol.modificar(dato,datoNuevo);
 	arbol.imprimir();
 
 	return 0;

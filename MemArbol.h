@@ -22,6 +22,7 @@ public:
 	MemArbol();
 	bool insertar(Dato datoAInsertar);
 	bool eliminar(Dato datoAEliminar);
+	bool modificar(Dato datoActual, Dato datoNuevo);
 	bool consultarId(int idAConsultar, Dato *datoConsultado);
 	bool consultarCodigo(char codigoAConsultar[3], Dato *datoConsultado);
 	bool consultarDescripcion(char descripcionAConsultar[1000], Dato *datoConsultado);

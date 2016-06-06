@@ -20,6 +20,7 @@ public:
 	ArbolLsm();
 	void insertar(Dato datoAInsertar);
 	void eliminar(Dato datoAEliminar);
+	void modificar(Dato datoActual, Dato datoNuevo);
 	Dato consultarId(int idAConsultar);
 	Dato consultarCodigo(char codigoAConsultar[3]);
 	Dato consultarDescripcion(char descripcionAConsultar[1000]);

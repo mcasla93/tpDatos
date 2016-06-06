@@ -6,6 +6,7 @@
  */
 
 #include "ArbolLsm.h"
+#include "Dato.h"
 #include "MemArbol.h"
 #include "DiskArbol.h"
 
@@ -13,11 +14,11 @@ ArbolLsm::ArbolLsm() {
 }
 
 void ArbolLsm::insertar(Dato datoAInsertar) {
-	if (!this->c0.insertar(datoAInsertar)) {
+	//if (!this->c0.insertar(datoAInsertar)) {
 		if (!this->c1.insertar(datoAInsertar)){
 			//si entra aca es xq es dato duplicado
 		}
-	}
+	//}
 }
 
 void ArbolLsm::eliminar(Dato datoAEliminar) {
@@ -26,6 +27,14 @@ void ArbolLsm::eliminar(Dato datoAEliminar) {
 			//si entra aca es xq no existe el dato a borrar
 		}
 	}
+}
+
+void ArbolLsm::modificar(Dato datoActual, Dato datoNuevo) {
+	//if (!this->c0.modificar(datoActual,datoNuevo)) {
+		if (!this->c1.modificar(datoActual,datoNuevo)){
+			//si entra aca es xq no existe el dato a borrar
+		}
+	//}
 }
 
 Dato ArbolLsm::consultarId(int idAConsultar) {

@@ -21,6 +21,11 @@ bool MemArbol::eliminar(Dato datoAEliminar) {
 	return true;
 }
 
+bool MemArbol::modificar(Dato datoActual, Dato datoNuevo) {
+	//this->arbol.modificar(datoActual, datoNuevo);
+	return true;
+}
+
 bool MemArbol::consultarId(int idAConsultar, Dato* datoConsultado) {
 	if (this->arbol.buscarId(idAConsultar, datoConsultado)){
 		return true;

@@ -50,6 +50,29 @@ bool DiskArbol::eliminar(Dato datoAEliminar) {
 	return true;
 }
 
+bool DiskArbol::modificar(Dato datoActual, Dato datoNuevo) {
+	ofstream escritura("temporal",ios::app);
+	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
+
+	while(!lectura.eof()) {
+		Dato dato;
+		lectura.read(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+		if(lectura.eof())
+			break;
+
+		if (datoActual.id != dato.id){
+			escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+		}else escritura.write(reinterpret_cast<char *>(&datoNuevo),sizeof(struct Dato));
+	}
+
+	lectura.close();
+	escritura.close();
+
+	rename("temporal",RUTAARCHIVO.c_str());
+
+	return true;
+}
+
 bool DiskArbol::consultarId(int idAConsultar, Dato *datoConsultado) {
 	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
 	bool result = false;
