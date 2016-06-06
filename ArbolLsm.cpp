@@ -13,11 +13,11 @@ ArbolLsm::ArbolLsm() {
 }
 
 void ArbolLsm::insertar(Dato datoAInsertar) {
-	//if (!this->c0.insertar(datoAInsertar)) {
+	if (!this->c0.insertar(datoAInsertar)) {
 		if (!this->c1.insertar(datoAInsertar)){
 			//si entra aca es xq es dato duplicado
 		}
-	//}
+	}
 }
 
 void ArbolLsm::eliminar(Dato datoAEliminar) {
@@ -28,32 +28,38 @@ void ArbolLsm::eliminar(Dato datoAEliminar) {
 	}
 }
 
-void ArbolLsm::consultarId(int consultarId) {
-	//if (!this->c0.consultarId(datoAConsultar)) {
-		if (!this->c1.consultarId(consultarId)){
+Dato ArbolLsm::consultarId(int idAConsultar) {
+	Dato datoConsultado;
+	if (!this->c0.consultarId(idAConsultar,&datoConsultado)) {
+		if (!this->c1.consultarId(idAConsultar,&datoConsultado)){
 			//si entra aca es xq no existe el dato a consultar me oiste
 		}
-	//}
+	}
+	return datoConsultado;
 }
 
-void ArbolLsm::consultarCodigo(char codigoAConsultar[3]) {
-	//if (!this->c0.consultarCodigo(codigoAConsultar)) {
-		if (!this->c1.consultarCodigo(codigoAConsultar)){
+Dato ArbolLsm::consultarCodigo(char codigoAConsultar[3]) {
+	Dato datoConsultado;
+	if (!this->c0.consultarCodigo(codigoAConsultar,&datoConsultado)) {
+		if (!this->c1.consultarCodigo(codigoAConsultar,&datoConsultado)){
 			//si entra aca es xq no existe el dato a consultar me oiste
 		}
-	//}
+	}
+	return datoConsultado;
 }
 
-void ArbolLsm::consultarDescripcion(char descripcionAConsultar[1000]) {
-	//if (!this->c0.consultarDescripcion(descripcionAConsultar)) {
-		if (!this->c1.consultarDescripcion(descripcionAConsultar)){
+Dato ArbolLsm::consultarDescripcion(char descripcionAConsultar[1000]) {
+	Dato datoConsultado;
+	if (!this->c0.consultarDescripcion(descripcionAConsultar,&datoConsultado)) {
+		if (!this->c1.consultarDescripcion(descripcionAConsultar,&datoConsultado)){
 			//si entra aca es xq no existe el dato a consultar me oiste
 		}
-	//}
+	}
+	return datoConsultado;
 }
 
 void ArbolLsm::imprimir() {
-	//c0.imprimir();
+	c0.imprimir();
 	c1.imprimir();
 }
 

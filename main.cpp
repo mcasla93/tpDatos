@@ -17,13 +17,13 @@ int main(int argc, char *argv[]) {
 
 	dato.cargar(2,"2","pablo");
 	arbol.insertar(dato);
-
 	dato.cargar(1,"3","matu");
 	arbol.insertar(dato);
 
-	arbol.consultarId(2);
-	arbol.consultarCodigo("3");
-	arbol.consultarDescripcion("pablo");
+	dato = arbol.consultarDescripcion("pablo");
+	arbol.eliminar(dato);
+
+	arbol.imprimir();
 
 	return 0;
 }

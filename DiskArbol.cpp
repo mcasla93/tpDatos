@@ -28,13 +28,29 @@ bool DiskArbol::insertar(struct Dato datoAInsertar) {
 }
 
 bool DiskArbol::eliminar(Dato datoAEliminar) {
-	//this->archivo.open("diskArbol.info");
-	// procedimiento para eliminar del archivo
-	//this->archivo.close();
+	ofstream escritura("temporal",ios::app);
+	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
+
+	while(!lectura.eof()) {
+		Dato dato;
+		lectura.read(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+		if(lectura.eof())
+			break;
+
+		if (datoAEliminar.id != dato.id){
+			escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+		}
+	}
+
+	lectura.close();
+	escritura.close();
+
+	rename("temporal",RUTAARCHIVO.c_str());
+
 	return true;
 }
 
-bool DiskArbol::consultarId(int idAConsultar) {
+bool DiskArbol::consultarId(int idAConsultar, Dato *datoConsultado) {
 	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
 	bool result = false;
 
@@ -46,8 +62,7 @@ bool DiskArbol::consultarId(int idAConsultar) {
 			break;
 
 		if (idAConsultar == dato.id){
-			dato.imprimir();
-			cout << endl;
+			datoConsultado->cargar(dato.id,dato.codigo,dato.descripcion);
 			result = true;
 		}
 	}
@@ -57,7 +72,7 @@ bool DiskArbol::consultarId(int idAConsultar) {
 	return result;
 }
 
-bool DiskArbol::consultarCodigo(char codigoAConsultar[3]) {
+bool DiskArbol::consultarCodigo(char codigoAConsultar[3], Dato *datoConsultado) {
 	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
 	bool result = false;
 
@@ -69,8 +84,7 @@ bool DiskArbol::consultarCodigo(char codigoAConsultar[3]) {
 			break;
 
 		if (strcmp(codigoAConsultar,dato.codigo)==0){
-			dato.imprimir();
-			cout << endl;
+			datoConsultado->cargar(dato.id,dato.codigo,dato.descripcion);
 			result = true;
 		}
 	}
@@ -80,7 +94,7 @@ bool DiskArbol::consultarCodigo(char codigoAConsultar[3]) {
 	return result;
 }
 
-bool DiskArbol::consultarDescripcion(char descripcionAConsultar[1000]) {
+bool DiskArbol::consultarDescripcion(char descripcionAConsultar[1000], Dato *datoConsultado) {
 	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
 	bool result = false;
 
@@ -92,8 +106,7 @@ bool DiskArbol::consultarDescripcion(char descripcionAConsultar[1000]) {
 			break;
 
 		if (strcmp(descripcionAConsultar,dato.descripcion)==0){
-			dato.imprimir();
-			cout << endl;
+			datoConsultado->cargar(dato.id,dato.codigo,dato.descripcion);
 			result = true;
 		}
 	}

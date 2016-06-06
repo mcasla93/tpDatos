@@ -20,9 +20,9 @@ public:
 	ArbolLsm();
 	void insertar(Dato datoAInsertar);
 	void eliminar(Dato datoAEliminar);
-	void consultarId(int idAConsultar);
-	void consultarCodigo(char codigoAConsultar[3]);
-	void consultarDescripcion(char descripcionAConsultar[1000]);
+	Dato consultarId(int idAConsultar);
+	Dato consultarCodigo(char codigoAConsultar[3]);
+	Dato consultarDescripcion(char descripcionAConsultar[1000]);
 	void imprimir();
 	virtual ~ArbolLsm();
 };

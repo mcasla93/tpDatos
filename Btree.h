@@ -409,7 +409,7 @@ template <class Type, int order> void Btree<Type,order>::imprimirArbol( B_node<T
 template <class Type, int order> void Btree<Type,order>::mostrarArbol(){
 	
 	if ( root == NULL ) 
-		cout<<"BTree is empty..."; 
+		cout << "BTree is empty..." << endl;
 	else{ 
 		cout <<"PAG\tKeys Nodo\n";
 		imprimirArbol( root );
