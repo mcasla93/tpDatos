@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
 	dato.cargar(6,"6","pelu");
 	arbol.insertar(dato);
 
-	arbol.consultarId(2);
+	arbol.modificarId(2);
 
 	arbol.imprimir();
 

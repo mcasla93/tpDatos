@@ -32,8 +32,9 @@ public: // publics.
 	void mostrarArbol();
 	// insertion
 	bool buscarEnNodo( B_node<Type, order> *current, Type &target, int &position );
-	void modificarDescripcion( Type &searchitem, char descripcionNueva[]);
-	void modificarCodigo(Type &searchitem, char codigoNuevo[]);
+	void modificarId( Type &searchitem, int idNuevo);
+	void modificarDescripcion( Type &searchitem, char descripcionNueva[1000]);
+	void modificarCodigo(Type &searchitem, char codigoNuevo[3]);
 	void insertar(Type &new_entry);
 	void insertarEnRecursion( B_node<Type, order> *current, Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result );
 	void insertarEnNodo(B_node<Type, order> *current, const Type &entry, B_node<Type, order> *rightchilds, int position);
@@ -172,14 +173,23 @@ template <class Type, int order> bool Btree<Type,order>::buscarIdEnNodo(B_node<T
 		return false;
 }
 
-template <class Type, int order> void Btree<Type,order>::modificarDescripcion( Type &searchitem, char descripcionNueva[]){
+template <class Type, int order> void Btree<Type,order>::modificarId( Type &searchitem, int idNuevo){
 	bool resultado;
-	resultado= Encontrar( root , searchitem );
-	if (resultado)
-	    searchitem->modificarDescripcion(descripcionNueva);
+	Type modificado;
+	modificado->cargar(idNuevo,searchitem->codigo,searchitem->descripcion);
+	remover( searchitem );
+	insertar(modificado);
 }
 
-template <class Type, int order> void Btree<Type,order>::modificarCodigo( Type &searchitem, char codigoNuevo[]){
+template <class Type, int order> void Btree<Type,order>::modificarDescripcion( Type &searchitem, char descripcionNueva[1000]){
+	bool resultado;
+	resultado = Encontrar( root , searchitem );
+	if (resultado)
+	    searchitem->modificarDescripcion(descripcionNueva);
+		searchitem->cargar(searchitem->id,searchitem->codigo,descripcionNueva);
+}
+
+template <class Type, int order> void Btree<Type,order>::modificarCodigo( Type &searchitem, char codigoNuevo[3]){
 	bool resultado;
 	resultado= Encontrar( root , searchitem );
 		if (resultado)
