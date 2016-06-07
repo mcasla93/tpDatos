@@ -32,6 +32,8 @@ public: // publics.
 	void mostrarArbol();
 	// insertion
 	bool buscarEnNodo( B_node<Type, order> *current, Type &target, int &position );
+	void modificarDescripcion( Type &searchitem, char descripcionNueva[]);
+	void modificarCodigo(Type &searchitem, char codigoNuevo[]);
 	void insertar(Type &new_entry);
 	void insertarEnRecursion( B_node<Type, order> *current, Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result );
 	void insertarEnNodo(B_node<Type, order> *current, const Type &entry, B_node<Type, order> *rightchilds, int position);
@@ -168,6 +170,20 @@ template <class Type, int order> bool Btree<Type,order>::buscarIdEnNodo(B_node<T
 		return true;
 	}else
 		return false;
+}
+
+template <class Type, int order> void Btree<Type,order>::modificarDescripcion( Type &searchitem, char descripcionNueva[]){
+	bool resultado;
+	resultado= Encontrar( root , searchitem );
+	if (resultado)
+	    searchitem->modificarDescripcion(descripcionNueva);
+}
+
+template <class Type, int order> void Btree<Type,order>::modificarCodigo( Type &searchitem, char codigoNuevo[]){
+	bool resultado;
+	resultado= Encontrar( root , searchitem );
+		if (resultado)
+		    searchitem->modificarCodigo(codigoNuevo);
 }
 
 template <class Type, int order> void Btree<Type,order>::insertar(Type &new_entry){

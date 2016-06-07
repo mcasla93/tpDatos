@@ -18,9 +18,15 @@ using namespace std;
 		int id;
 		char codigo[3];
 		char descripcion[1000];
-		void cargar(int id, char codigo[3], char descripcion[1000]) {
+		void cargar(int id, char codigo[], char descripcion[]) {
 			this->id = id;
 			strcpy(this->codigo,codigo);
+			strcpy(this->descripcion,descripcion);
+		}
+		void modificarCodigo( char codigo[]){
+			strcpy(this->codigo,codigo);
+		}
+		void modificarDescripcion( char descripcion[]){
 			strcpy(this->descripcion,descripcion);
 		}
 		void imprimir(){
