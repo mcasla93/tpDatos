@@ -8,7 +8,6 @@
 #include "MemArbol.h"
 
 MemArbol::MemArbol() {
-
 }
 
 bool MemArbol::insertar(Dato datoAInsertar) {
@@ -56,6 +55,5 @@ void MemArbol::imprimir() {
 }
 
 MemArbol::~MemArbol() {
-	// TODO Auto-generated destructor stub
 }
 
