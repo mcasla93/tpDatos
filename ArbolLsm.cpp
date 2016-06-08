@@ -13,6 +13,10 @@
 ArbolLsm::ArbolLsm() {
 }
 
+void cargarDesdeArchivo(char *direccionArchivo){
+	//completar
+}
+
 void ArbolLsm::insertar(Dato datoAInsertar) {
 	if (!this->c0.insertar(datoAInsertar)) {
 		if (!this->c1.insertar(datoAInsertar)){

@@ -18,6 +18,7 @@ private:
 	DiskArbol c1;
 public:
 	ArbolLsm();
+	void cargarDesdeArchivo(char *direccionArchivo);
 	void insertar(Dato datoAInsertar);
 	void eliminar(Dato datoAEliminar);
 	void modificar(Dato datoActual, Dato datoNuevo);

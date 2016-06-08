@@ -46,28 +46,42 @@ void imprimirMenuHelp(){
 	cout << " ­La opción 'f' indica que se guardará el resultado en un archivo, caso contrario sale por pantalla." << endl;
 }
 
-int main(int argc, char *argv[]) {
-	ArbolLsm arbol;
-	Dato dato;
+void alta(ArbolLsm *arbol){
+	char id;
+	char codigo[3];
+	char descripcion[1000];
 
-	if ((argc == 1) || (strcmp(argv[1],"h")==0) ) {
-		imprimirMenuHelp();
-	}
-	char opMenu;
-	memcpy(&opMenu,&argv[1],1);
-	switch (opMenu){
-		case 'a':
-			break;
-		case 'b':
-			break;
-		case 'm':
-			break;
-		case 'h':
-			imprimirMenuHelp();
-			break;
-		default:
-			imprimirMenuHelp();
-	}
+	cout << "Ingrese un nuevo dato" << endl;
+	cout << "Id: ";
+	cin >> id;
+	cout << "Codigo: ";
+	cin >> codigo;
+	cout << "Descripcion: ";
+	cin >> descripcion;
+	cout << endl;
+
+	Dato nuevoDato;
+	nuevoDato.cargar(id,codigo,descripcion);
+
+	arbol->insertar(nuevoDato);
+
+	//ACA HAY Q AGREGARLO AL ARBOL
+	//PERO PRIMERO HAY Q CARGAR EL ARBOL DESDE EL ARCHIVO
+	arbol->imprimir();
+	cout << endl;
+}
+
+void baja(){
+	cout << "Ingrese dato a eliminar" << endl;
+}
+
+void modificacion(){
+	cout << "Ingrese dato a modificar" << endl;
+}
+
+int main(int argc, char *argv[]) {
+	/*ArbolLsm arbol;
+	Dato dato;
 
 	dato.cargar(2,"2","pablo");
 	arbol.insertar(dato);
@@ -82,7 +96,95 @@ int main(int argc, char *argv[]) {
 
 	arbol.modificarId(2);
 
-	arbol.imprimir();
+	arbol.imprimir();*/
+
+	ArbolLsm arbol;
+
+	if (argc == 1) {
+		//si no pasa ningun parametro al ejecutar
+		imprimirMenuHelp();
+	}
+	/*MENU*/
+	char opMenu;
+	memcpy(&opMenu,&argv[1][1],1);
+	switch (opMenu){
+	case 'a':
+		//ALTA
+		arbol.cargarDesdeArchivo(&argv[3]);
+		alta(&arbol);
+		break;
+	case 'b':
+		//BAJA
+		arbol.cargarDesdeArchivo(argv[3]);
+		baja();
+		break;
+	case 'm':
+		//MODIFICACION
+		arbol.cargarDesdeArchivo(argv[3]);
+		modificacion();
+		break;
+	case 'q':
+		//CONSULTA
+		arbol.cargarDesdeArchivo(argv[3]);
+		char opMenuQ;
+		memcpy(&opMenuQ,&argv[2][0],1);
+		switch (opMenuQ){
+			case 'A':
+				//Búsqueda de Vendedor por Identificador
+				break;
+			case 'B':
+				// Búsqueda de Vendedor por Nombre
+				break;
+			case 'C':
+				//Búsqueda de Venta por Código de Vendedor
+				break;
+			case 'D':
+				//Búsqueda de Venta por Código de Producto
+				break;
+			case 'E':
+				//Búsqueda de Producto por Identificador
+				break;
+			case 'F':
+				//Búsqueda de Producto por Nombre
+				break;
+			case 'G':
+				//Búsqueda de Grupo por Identificador
+				break;
+			case 'H':
+				//Búsqueda de Vendedor por Identificador, con el índice
+				break;
+			case 'I':
+				//Búsqueda de Vendedor por Nombre, con el índice
+				break;
+			case 'J':
+				//Búsqueda de Venta por Código de Vendedor, con el índice
+				break;
+			case 'K':
+				//Búsqueda de Venta por Código de Producto, con el índice
+				break;
+			case 'L':
+				//Búsqueda de Producto por Identificador, con el índice
+				break;
+			case 'M':
+				//Búsqueda de Producto por Nombre, con el índice
+				break;
+			case 'N':
+				//Búsqueda de Grupo por Identificador, con el índice
+				break;
+			case 'O':
+				//Informe: Listado de ventas por Vendedor.
+				break;
+			case 'P':
+				//Informe: Ahorro de espacio por compresión
+				break;
+			default:
+				//imprimirMenuHelp();
+				break;
+		}
+		break;
+	default:
+		imprimirMenuHelp();
+}
 
 	return 0;
 }
