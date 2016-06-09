@@ -78,7 +78,7 @@ void baja(ArbolLsm *arbol){
 	arbol->eliminar(dato);
 }
 
-void modificacion(){
+void modificacion(ArbolLsm *arbol){
 	cout << "Ingrese dato a modificar" << endl;
 }
 
@@ -152,7 +152,7 @@ int main(int argc, char *argv[]) {
 	case 'm':
 		//MODIFICACION
 		cargarArbolDesdeArchivo(argv[3],&arbol);
-		modificacion();
+		modificacion(&arbol);
 		guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'q':
