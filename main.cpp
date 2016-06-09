@@ -101,7 +101,7 @@ void modificacion(ArbolLsm *arbol){
 		cout << endl;
 		Dato nuevoDato;
 		nuevoDato.cargar(nuevoId, dato.codigo, dato.descripcion);
-
+        //aca esta lo importante
 		arbol->eliminar(dato);
 		arbol->insertar(nuevoDato);
 
