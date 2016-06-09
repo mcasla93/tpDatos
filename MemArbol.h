@@ -27,6 +27,7 @@ public:
 	bool consultarCodigo(char codigoAConsultar[3], Dato *datoConsultado);
 	bool consultarDescripcion(char descripcionAConsultar[1000], Dato *datoConsultado);
 	void imprimir();
+	void guardarEnArchivo(string direccionArchivo);
 	virtual ~MemArbol();
 };
 

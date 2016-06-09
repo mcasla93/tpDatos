@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <stdio.h>
 #include <string.h>
+#include <fstream>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ protected: // dato members
 	B_node<Type, order> *root;
 private:
 	void recInorder(B_node<Type, order> * current );
+	void guardarInorder(B_node<Type, order> *current, ofstream *escritura);
 	bool Encontrar( B_node<Type, order> *current, Type &target);
 	bool EncontrarId( B_node<Type, order> *current, int idConsultado, Type *datoConsultado);
 	bool EncontrarCodigo( B_node<Type, order> *current, char codigoConsultado[3], Type *datoConsultado);
@@ -53,6 +55,8 @@ public: // publics.
 	void combinar( B_node<Type, order> *current, int position );
 	
 	void imprimirArbol( B_node<Type, order> *current );
+
+	void guardarEnArchivo(string direccionArchivo);
 };
 
 template <class Type, int order> Btree<Type,order>::Btree(){
@@ -440,6 +444,29 @@ template <class Type, int order> void Btree<Type,order>::mostrarArbol(){
 		cout <<"PAG\tKeys Nodo\n";
 		imprimirArbol( root );
 	} 
+}
+
+template <class Type, int order> void Btree<Type,order>::guardarInorder(B_node<Type, order> *current, ofstream *escritura) {
+	if ( current != NULL ){
+		guardarInorder( current->childs[0],escritura);
+		for (int i = 0; i < current->count; i++){
+			cout << "meto: ";
+			current->data[i].imprimir();
+			cout << endl;
+			escritura->write(reinterpret_cast<char *>(&current->data[i]),sizeof(Type));
+			guardarInorder(current->childs[i + 1],escritura);
+		}
+	}
+}
+
+template <class Type, int order> void Btree<Type,order>::guardarEnArchivo(string direccionArchivo){
+	fstream archivo;
+	archivo.open(direccionArchivo.c_str(),ofstream::out);
+	archivo.close();
+
+	ofstream escritura(direccionArchivo.c_str(),ios::app);
+	guardarInorder(root,&escritura);
+	escritura.close();
 }
 
 #endif

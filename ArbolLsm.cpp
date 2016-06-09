@@ -13,10 +13,6 @@
 ArbolLsm::ArbolLsm() {
 }
 
-void cargarDesdeArchivo(char *direccionArchivo){
-	//completar
-}
-
 void ArbolLsm::insertar(Dato datoAInsertar) {
 	if (!this->c0.insertar(datoAInsertar)) {
 		if (!this->c1.insertar(datoAInsertar)){
@@ -74,6 +70,11 @@ Dato ArbolLsm::consultarDescripcion(char descripcionAConsultar[1000]) {
 void ArbolLsm::imprimir() {
 	c0.imprimir();
 	c1.imprimir();
+}
+
+void ArbolLsm::guardarEnArchivo(string direccionArchivo){
+	//solo guardo el arbolb dsps hay q adaptar el del archivo
+	c0.guardarEnArchivo(direccionArchivo);
 }
 
 ArbolLsm::~ArbolLsm() {

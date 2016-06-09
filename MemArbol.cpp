@@ -54,6 +54,10 @@ void MemArbol::imprimir() {
 	this->arbol.mostrarArbol();
 }
 
+void MemArbol::guardarEnArchivo(string direccionArchivo){
+	arbol.guardarEnArchivo(direccionArchivo);
+}
+
 MemArbol::~MemArbol() {
 }
 

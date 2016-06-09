@@ -144,7 +144,7 @@ void DiskArbol::imprimir() {
 
 	while(!lectura.eof()) {
 		Dato dato;
-		lectura.read(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+		lectura.read(reinterpret_cast<char *>(&dato),sizeof(Dato));
 
 		if(lectura.eof())
 			break;

@@ -47,7 +47,7 @@ void imprimirMenuHelp(){
 }
 
 void alta(ArbolLsm *arbol){
-	char id;
+	int id;
 	char codigo[3];
 	char descripcion[1000];
 
@@ -64,11 +64,6 @@ void alta(ArbolLsm *arbol){
 	nuevoDato.cargar(id,codigo,descripcion);
 
 	arbol->insertar(nuevoDato);
-
-	//ACA HAY Q AGREGARLO AL ARBOL
-	//PERO PRIMERO HAY Q CARGAR EL ARBOL DESDE EL ARCHIVO
-	arbol->imprimir();
-	cout << endl;
 }
 
 void baja(){
@@ -79,53 +74,78 @@ void modificacion(){
 	cout << "Ingrese dato a modificar" << endl;
 }
 
+void cargarArbolDesdeArchivo(string direccionArchivo,ArbolLsm *arbol){
+	ifstream lectura(direccionArchivo.c_str(),ios::in | ios::binary);
+
+	while(!lectura.eof()) {
+		Dato dato;
+		lectura.read(reinterpret_cast<char *>(&dato),sizeof(Dato));
+
+		if(lectura.eof())
+			break;
+
+		arbol->insertar(dato);
+	}
+	lectura.close();
+}
+
+void guardarArbolEnArchivo(string direccionArchivo,ArbolLsm *arbol){
+	arbol->guardarEnArchivo(direccionArchivo);
+}
+
 int main(int argc, char *argv[]) {
-	/*ArbolLsm arbol;
-	Dato dato;
-
-	dato.cargar(2,"2","pablo");
-	arbol.insertar(dato);
-	dato.cargar(3,"3","matu");
-	arbol.insertar(dato);
-	dato.cargar(4,"4","pepe");
-	arbol.insertar(dato);
-	dato.cargar(5,"5","carlo");
-	arbol.insertar(dato);
-	dato.cargar(6,"6","pelu");
-	arbol.insertar(dato);
-
-	arbol.modificarId(2);
-
-	arbol.imprimir();*/
-
 	ArbolLsm arbol;
 
+	/* CREACION DEL ARCHIVO PARA PRUEBAS
+	fstream archivo;
+	archivo.open("vendedores.txt",ofstream::out);
+	archivo.close();
+
+	ofstream escritura("vendedores.txt",ios::app);
+	Dato dato;
+	dato.cargar(2,"2","pablo");
+	escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+	dato.cargar(3,"3","matu");
+	escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+	dato.cargar(4,"4","pepe");
+	escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+	dato.cargar(5,"5","carlo");
+	escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+	dato.cargar(6,"6","pelu");
+	escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
+	escritura.close();
+	*/
 	if (argc == 1) {
 		//si no pasa ningun parametro al ejecutar
 		imprimirMenuHelp();
 	}
+
 	/*MENU*/
 	char opMenu;
 	memcpy(&opMenu,&argv[1][1],1);
+
 	switch (opMenu){
 	case 'a':
 		//ALTA
-		arbol.cargarDesdeArchivo(&argv[3]);
+		cargarArbolDesdeArchivo(argv[3],&arbol);
+		arbol.imprimir();
 		alta(&arbol);
+		arbol.imprimir();
+		guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'b':
 		//BAJA
-		arbol.cargarDesdeArchivo(argv[3]);
+		cargarArbolDesdeArchivo(argv[3],&arbol);
 		baja();
 		break;
 	case 'm':
 		//MODIFICACION
-		arbol.cargarDesdeArchivo(argv[3]);
+		cargarArbolDesdeArchivo(argv[3],&arbol);
 		modificacion();
 		break;
 	case 'q':
 		//CONSULTA
-		arbol.cargarDesdeArchivo(argv[3]);
+		cargarArbolDesdeArchivo(argv[3],&arbol);
 		char opMenuQ;
 		memcpy(&opMenuQ,&argv[2][0],1);
 		switch (opMenuQ){
@@ -182,9 +202,9 @@ int main(int argc, char *argv[]) {
 				break;
 		}
 		break;
-	default:
+		default:
 		imprimirMenuHelp();
-}
+	}
 
 	return 0;
 }
