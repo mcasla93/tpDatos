@@ -79,7 +79,67 @@ void baja(ArbolLsm *arbol){
 }
 
 void modificacion(ArbolLsm *arbol){
+	char opcion;
 	cout << "Ingrese dato a modificar" << endl;
+	cout << "i - ID" << endl;
+	cout << "c - CODIGO" << endl;
+	cout << "d - DESCRIPCION" << endl;
+
+	cin >> opcion;
+	switch (opcion){
+	case 'i':
+		//aca deberia hacer lo de borrarlo, crear uno nuevo y acomodarlo.
+		int id, nuevoId;
+
+		cout << "Ingrese ID a modificar" << endl;
+		cout << "Id: ";
+		cin >> id;
+		cout << endl;
+		Dato dato = arbol->consultarId(id);
+		cout << "ingrese el NUEVO ID: ";
+		cin >> nuevoId;
+		cout << endl;
+		Dato nuevoDato;
+		nuevoDato.cargar(nuevoId, dato.codigo, dato.descripcion);
+
+		arbol->eliminar(dato);
+		arbol->insertar(nuevoDato);
+
+		break;
+	case 'c':
+
+	      char codigo[3];
+	      cout<< "ingrese el codigo:";
+	      cin >> codigo;
+	      cout<< endl;
+	      Dato dato= arbol->consultarCodigo(codigo);
+	      char codigoNuevo[3];
+          cout<< "ingrese el NUEVO codigo: ";
+          cin >> codigoNuevo;
+          cout << endl;
+          Dato nuevoDato;
+          // aca hay dudassss
+          nuevoDato.cargar(dato.id, codigoNuevo, dato.descripcion);
+          arbol->modificar(dato, nuevoDato);
+
+	      break;
+
+	case 'd':
+		  char descripcion[1000];
+		  cout<< "ingrese la descripcion:";
+		  cin >> descripcion;
+		  cout<< endl;
+		  Dato dato = arbol->consultarDescripcion(descripcion);
+		  char descripcionNueva[1000];
+		  cout<< "ingrese la NUEVA descripcion: ";
+		  cin>> descripcionNueva;
+		  cout << endl;
+		  Dato nuevoDato;
+		  nuevoDato.cargar(dato.id, dato.codigo, descripcionNueva);
+		  arbol->modificar(dato, nuevoDato);
+		  break;
+
+	}
 }
 
 void cargarArbolDesdeArchivo(string direccionArchivo,ArbolLsm *arbol){
@@ -104,7 +164,7 @@ void guardarArbolEnArchivo(string direccionArchivo,ArbolLsm *arbol){
 int main(int argc, char *argv[]) {
 	ArbolLsm arbol;
 
-	/* CREACION DEL ARCHIVO PARA PRUEBAS
+	/*CREACION DEL ARCHIVO PARA PRUEBAS
 	fstream archivo;
 	archivo.open("vendedores.txt",ofstream::out);
 	archivo.close();
@@ -122,7 +182,7 @@ int main(int argc, char *argv[]) {
 	dato.cargar(6,"6","pelu");
 	escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
 	escritura.close();
-	*/
+    */
 	if (argc == 1) {
 		//si no pasa ningun parametro al ejecutar
 		imprimirMenuHelp();
