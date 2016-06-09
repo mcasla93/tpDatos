@@ -66,8 +66,16 @@ void alta(ArbolLsm *arbol){
 	arbol->insertar(nuevoDato);
 }
 
-void baja(){
-	cout << "Ingrese dato a eliminar" << endl;
+void baja(ArbolLsm *arbol){
+	int id;
+
+	cout << "Ingrese ID a eliminar" << endl;
+	cout << "Id: ";
+	cin >> id;
+	cout << endl;
+
+	Dato dato = arbol->consultarId(id);
+	arbol->eliminar(dato);
 }
 
 void modificacion(){
@@ -136,12 +144,16 @@ int main(int argc, char *argv[]) {
 	case 'b':
 		//BAJA
 		cargarArbolDesdeArchivo(argv[3],&arbol);
-		baja();
+		arbol.imprimir();
+		baja(&arbol);
+		arbol.imprimir();
+		guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'm':
 		//MODIFICACION
 		cargarArbolDesdeArchivo(argv[3],&arbol);
 		modificacion();
+		guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'q':
 		//CONSULTA
