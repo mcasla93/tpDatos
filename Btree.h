@@ -450,9 +450,6 @@ template <class Type, int order> void Btree<Type,order>::guardarInorder(B_node<T
 	if ( current != NULL ){
 		guardarInorder( current->childs[0],escritura);
 		for (int i = 0; i < current->count; i++){
-			cout << "meto: ";
-			current->data[i].imprimir();
-			cout << endl;
 			escritura->write(reinterpret_cast<char *>(&current->data[i]),sizeof(Type));
 			guardarInorder(current->childs[i + 1],escritura);
 		}
