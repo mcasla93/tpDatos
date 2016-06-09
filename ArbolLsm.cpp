@@ -30,11 +30,11 @@ void ArbolLsm::eliminar(Dato datoAEliminar) {
 }
 
 void ArbolLsm::modificar(Dato datoActual, Dato datoNuevo) {
-	//if (!this->c0.modificar(datoActual,datoNuevo)) {
+	if (!this->c0.modificar(datoActual,datoNuevo)) {
 		if (!this->c1.modificar(datoActual,datoNuevo)){
 			//si entra aca es xq no existe el dato a borrar
 		}
-	//}
+	}
 }
 
 Dato ArbolLsm::consultarId(int idAConsultar) {

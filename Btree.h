@@ -73,7 +73,7 @@ template <class Type, int order> void Btree<Type,order>::recInorder(B_node<Type,
 		recInorder( current->childs[0]);
 		for (int i = 0; i < current->count; i++)
 		{
-			current->data[i].imprimir();
+			//current->data[i].imprimir();
 			recInorder(current->childs[i + 1]);
 		}
 	}

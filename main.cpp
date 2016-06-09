@@ -86,6 +86,9 @@ void modificacion(ArbolLsm *arbol){
 	cout << "d - DESCRIPCION" << endl;
 
 	cin >> opcion;
+	Dato datoC;
+	Dato nuevoDatoM;
+
 	switch (opcion){
 	case 'i':
 		//aca deberia hacer lo de borrarlo, crear uno nuevo y acomodarlo.
@@ -95,50 +98,47 @@ void modificacion(ArbolLsm *arbol){
 		cout << "Id: ";
 		cin >> id;
 		cout << endl;
-		Dato dato = arbol->consultarId(id);
+		datoC = arbol->consultarId(id);
 		cout << "ingrese el NUEVO ID: ";
 		cin >> nuevoId;
 		cout << endl;
-		Dato nuevoDato;
-		nuevoDato.cargar(nuevoId, dato.codigo, dato.descripcion);
+
+		nuevoDatoM.cargar(nuevoId, datoC.codigo, datoC.descripcion);
         //aca esta lo importante
-		arbol->eliminar(dato);
-		arbol->insertar(nuevoDato);
-
+		arbol->eliminar(datoC);
+		arbol->insertar(nuevoDatoM);
 		break;
+
 	case 'c':
+		char codigo[3];
+		cout<< "ingrese el codigo:";
+		cin >> codigo;
+		datoC = arbol->consultarCodigo(codigo);
 
-	      char codigo[3];
-	      cout<< "ingrese el codigo:";
-	      cin >> codigo;
-	      cout<< endl;
-	      Dato dato= arbol->consultarCodigo(codigo);
-	      char codigoNuevo[3];
-          cout<< "ingrese el NUEVO codigo: ";
-          cin >> codigoNuevo;
-          cout << endl;
-          Dato nuevoDato;
-          // aca hay dudassss
-          nuevoDato.cargar(dato.id, codigoNuevo, dato.descripcion);
-          arbol->modificar(dato, nuevoDato);
+		char codigoNuevo[3];
+		cout<< "ingrese el NUEVO codigo: ";
+		cin >> codigoNuevo;
 
-	      break;
+		// aca hay dudassss
+		nuevoDatoM.cargar(datoC.id, codigoNuevo, datoC.descripcion);
+		arbol->modificar(datoC, nuevoDatoM);
+		break;
 
 	case 'd':
-		  char descripcion[1000];
-		  cout<< "ingrese la descripcion:";
-		  cin >> descripcion;
-		  cout<< endl;
-		  Dato dato = arbol->consultarDescripcion(descripcion);
-		  char descripcionNueva[1000];
-		  cout<< "ingrese la NUEVA descripcion: ";
-		  cin>> descripcionNueva;
-		  cout << endl;
-		  Dato nuevoDato;
-		  nuevoDato.cargar(dato.id, dato.codigo, descripcionNueva);
-		  arbol->modificar(dato, nuevoDato);
-		  break;
+		char descripcion[1000];
+		cout<< "ingrese la descripcion:";
+		cin >> descripcion;
+		cout<< endl;
 
+		datoC = arbol->consultarDescripcion(descripcion);
+		char descripcionNueva[1000];
+		cout<< "ingrese la NUEVA descripcion: ";
+		cin>> descripcionNueva;
+		cout << endl;
+
+		nuevoDatoM.cargar(datoC.id, datoC.codigo, descripcionNueva);
+		arbol->modificar(datoC, nuevoDatoM);
+		break;
 	}
 }
 
@@ -212,8 +212,10 @@ int main(int argc, char *argv[]) {
 	case 'm':
 		//MODIFICACION
 		cargarArbolDesdeArchivo(argv[3],&arbol);
+		arbol.imprimir();
 		modificacion(&arbol);
-		guardarArbolEnArchivo(argv[3],&arbol);
+		arbol.imprimir();
+		//guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'q':
 		//CONSULTA
