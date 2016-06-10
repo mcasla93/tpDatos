@@ -197,7 +197,7 @@ template <class Type, int order> void Btree<Type,order>::modificarCodigo( Type &
 	bool resultado;
 	resultado= Encontrar( root , searchitem );
 		if (resultado)
-		    searchitem->modificarCodigo(codigoNuevo);
+		    searchitem.modificarCodigo(codigoNuevo);
 }
 
 template <class Type, int order> void Btree<Type,order>::insertar(Type &new_entry){

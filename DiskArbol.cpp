@@ -50,19 +50,22 @@ bool DiskArbol::eliminar(Dato datoAEliminar) {
 	return true;
 }
 
-bool DiskArbol::modificar(Dato datoActual, Dato datoNuevo) {
+bool DiskArbol::modificar(struct Dato datoActual, struct Dato datoNuevo) {
 	ofstream escritura("temporal",ios::app);
 	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
-
+	lectura.seekg(0, lectura.beg); // posiciona al principio por las dudas
 	while(!lectura.eof()) {
 		Dato dato;
+		cout << " leemos" << endl;
 		lectura.read(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
-		if(lectura.eof())
-			break;
-
-		if (datoActual.id != dato.id){
+		/*if(lectura.eof())
+			break;   //aca entra de una y no llega abajo
+        */
+		if (datoActual.id == dato.id){
+			cout << "supuestamente entro";
 			escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
-		}else escritura.write(reinterpret_cast<char *>(&datoNuevo),sizeof(struct Dato));
+		}else{ escritura.write(reinterpret_cast<char *>(&datoNuevo),sizeof(struct Dato));
+		       cout << " escribe en el segundo" << endl; }
 	}
 
 	lectura.close();

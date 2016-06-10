@@ -21,7 +21,7 @@ bool MemArbol::eliminar(Dato datoAEliminar) {
 }
 
 bool MemArbol::modificar(Dato datoActual, Dato datoNuevo) {
-	//this->arbol.modificar(datoActual, datoNuevo);
+	this->arbol.modificarCodigo(datoActual, datoNuevo.codigo);
 	return true;
 }
 

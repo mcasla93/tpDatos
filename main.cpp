@@ -104,7 +104,7 @@ void modificacion(ArbolLsm *arbol){
 		cout << endl;
 
 		nuevoDatoM.cargar(nuevoId, datoC.codigo, datoC.descripcion);
-        //aca esta lo importante
+
 		arbol->eliminar(datoC);
 		arbol->insertar(nuevoDatoM);
 		break;
@@ -114,13 +114,11 @@ void modificacion(ArbolLsm *arbol){
 		cout<< "ingrese el codigo:";
 		cin >> codigo;
 		datoC = arbol->consultarCodigo(codigo);
-
 		char codigoNuevo[3];
-		cout<< "ingrese el NUEVO codigo: ";
+		cout<< "ingrese el NUEVO codigo:";
 		cin >> codigoNuevo;
 
-		// aca hay dudassss
-		nuevoDatoM.cargar(datoC.id, codigoNuevo, datoC.descripcion);
+		nuevoDatoM.cargar(datoC.id , codigoNuevo, datoC.descripcion);
 		arbol->modificar(datoC, nuevoDatoM);
 		break;
 
@@ -182,7 +180,7 @@ int main(int argc, char *argv[]) {
 	dato.cargar(6,"6","pelu");
 	escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
 	escritura.close();
-    */
+   */
 	if (argc == 1) {
 		//si no pasa ningun parametro al ejecutar
 		imprimirMenuHelp();
