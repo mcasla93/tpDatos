@@ -14,19 +14,19 @@ ArbolLsm::ArbolLsm() {
 }
 
 void ArbolLsm::insertar(Dato datoAInsertar) {
-	if (!this->c0.insertar(datoAInsertar)) {
+	//if (!this->c0.insertar(datoAInsertar)) {
 		if (!this->c1.insertar(datoAInsertar)){
 			//si entra aca es xq es dato duplicado
 		}
-	}
+	//}
 }
 
 void ArbolLsm::eliminar(Dato datoAEliminar) {
-	if (!this->c0.eliminar(datoAEliminar)) {
+	//if (!this->c0.eliminar(datoAEliminar)) {
 		if (!this->c1.eliminar(datoAEliminar)){
 			//si entra aca es xq no existe el dato a borrar
 		}
-	}
+	//}
 }
 
 void ArbolLsm::modificar(Dato datoActual, Dato datoNuevo) {
@@ -34,6 +34,7 @@ void ArbolLsm::modificar(Dato datoActual, Dato datoNuevo) {
 		if (!this->c1.modificar(datoActual,datoNuevo)){
 			//si entra aca es xq no existe el dato a borrar
 		}
+	//}
 
 }
 

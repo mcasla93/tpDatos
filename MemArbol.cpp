@@ -21,33 +21,21 @@ bool MemArbol::eliminar(Dato datoAEliminar) {
 }
 
 bool MemArbol::modificar(Dato datoActual, Dato datoNuevo) {
-	this->arbol.modificarCodigo(datoActual, datoNuevo.codigo);
+	this->arbol.modificar(datoActual, datoNuevo);
+
 	return true;
 }
 
 bool MemArbol::consultarId(int idAConsultar, Dato* datoConsultado) {
-	if (this->arbol.buscarId(idAConsultar, datoConsultado)){
-		return true;
-	}else{
-		return false;
-	}
+	return this->arbol.buscarId(idAConsultar, datoConsultado);
 }
 
 bool MemArbol::consultarCodigo(char codigoAConsultar[3], Dato* datoConsultado) {
-	if (this->arbol.buscarCodigo(codigoAConsultar, datoConsultado)){
-		return true;
-	}else{
-		return false;
-	}
-
+	return this->arbol.buscarCodigo(codigoAConsultar, datoConsultado);
 }
 
 bool MemArbol::consultarDescripcion(char descripcionAConsultar[1000], Dato* datoConsultado) {
-	if (this->arbol.buscarDescripcion(descripcionAConsultar, datoConsultado)){
-		return true;
-	}else{
-		return false;
-	}
+	return this->arbol.buscarDescripcion(descripcionAConsultar, datoConsultado);
 }
 
 void MemArbol::imprimir() {

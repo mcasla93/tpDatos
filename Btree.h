@@ -14,6 +14,7 @@ template <class Type, int order> class Btree {
 
 protected: // dato members
 	B_node<Type, order> *root;
+	Type *cte;
 private:
 	void recInorder(B_node<Type, order> * current );
 	void guardarInorder(B_node<Type, order> *current, ofstream *escritura);
@@ -37,6 +38,7 @@ public: // publics.
 	void modificarId( Type &searchitem, int idNuevo);
 	void modificarDescripcion( Type &searchitem, char descripcionNueva[1000]);
 	void modificarCodigo(Type &searchitem, char codigoNuevo[3]);
+	void modificar(Type &searchitem, Type datoNuevo);
 	void insertar(Type &new_entry);
 	void insertarEnRecursion( B_node<Type, order> *current, Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result );
 	void insertarEnNodo(B_node<Type, order> *current, const Type &entry, B_node<Type, order> *rightchilds, int position);
@@ -61,6 +63,7 @@ public: // publics.
 
 template <class Type, int order> Btree<Type,order>::Btree(){
 	root = NULL;
+	cte = NULL;
 }
 
 template <class Type, int order> void Btree<Type,order>::inOrder(){  
@@ -71,17 +74,14 @@ template <class Type, int order> void Btree<Type,order>::recInorder(B_node<Type,
 	if ( current != NULL )
 	{
 		recInorder( current->childs[0]);
-		for (int i = 0; i < current->count; i++)
-		{
+		for (int i = 0; i < current->count; i++){
 			//current->data[i].imprimir();
 			recInorder(current->childs[i + 1]);
 		}
 	}
 }
 
-template <class Type, int order> bool Btree<Type,order>::buscar( Type &searchitem ){
-	return Encontrar( root , searchitem );
-}
+
 
 template <class Type, int order> bool Btree<Type,order>::buscarId(int idConsultado, Type *datoConsultado){
 	return EncontrarId( root , idConsultado, datoConsultado );
@@ -102,8 +102,10 @@ template <class Type, int order> bool Btree<Type,order>::Encontrar( B_node<Type,
 		result = buscarEnNodo(current, target, position);
 		if (result == false)
 			result = Encontrar(current->childs[position], target);
-		else
+		else{
 			target = current->data[position];//->getData();
+			cte = &(current->data[position]);
+		}
 	}
 	return result;
 }
@@ -125,33 +127,33 @@ template <class Type, int order> bool Btree<Type,order>::EncontrarId(B_node<Type
 
 template <class Type, int order> bool Btree<Type,order>::EncontrarCodigo(B_node<Type,order> *current, char codigoConsultado[3],Type *datoConsultado){
 	bool result = false;
-
 	if (current != NULL){
-		recInorder(current->childs[0]);
+		EncontrarCodigo(current->childs[0],codigoConsultado,datoConsultado);
 		for (int i = 0; i < current->count; i++){
 			if (strcmp(codigoConsultado,current->data[i].codigo)==0){
 				datoConsultado->cargar(current->data[i].id, current->data[i].codigo, current->data[i].descripcion);
 				result = true;
+				cte = &(current->data[i]);
 				break;
 			}
-			recInorder(current->childs[i + 1]);
+			EncontrarCodigo(current->childs[i + 1],codigoConsultado,datoConsultado);
 		}
 	}
-	return result;
 }
 
 template <class Type, int order> bool Btree<Type,order>::EncontrarDescripcion(B_node<Type,order> *current, char descripcionConsultada[1000],Type *datoConsultado){
 	bool result = false;
 
 	if (current != NULL){
-		recInorder(current->childs[0]);
+		EncontrarDescripcion(current->childs[0],descripcionConsultada,datoConsultado);
 		for (int i = 0; i < current->count; i++){
 			if (strcmp(descripcionConsultada,current->data[i].descripcion)==0){
 				datoConsultado->cargar(current->data[i].id, current->data[i].codigo, current->data[i].descripcion);
 				result = true;
+				cte = &(current->data[i]);
 				break;
 			}
-			recInorder(current->childs[i + 1]);
+			EncontrarDescripcion(current->childs[i + 1],descripcionConsultada,datoConsultado);
 		}
 	}
 	return result;
@@ -188,17 +190,31 @@ template <class Type, int order> void Btree<Type,order>::modificarId( Type &sear
 template <class Type, int order> void Btree<Type,order>::modificarDescripcion( Type &searchitem, char descripcionNueva[1000]){
 	bool resultado;
 	resultado = Encontrar( root , searchitem );
-	if (resultado)
-	    searchitem->modificarDescripcion(descripcionNueva);
-		searchitem->cargar(searchitem->id,searchitem->codigo,descripcionNueva);
+	if (resultado){
+	    Type nuevo;
+		nuevo.cargar(cte->id,cte->codigo,descripcionNueva);
+		memcpy(cte,&nuevo,sizeof(Type));
+	}
 }
 
 template <class Type, int order> void Btree<Type,order>::modificarCodigo( Type &searchitem, char codigoNuevo[3]){
 	bool resultado;
-	resultado= Encontrar( root , searchitem );
-		if (resultado)
-		    searchitem.modificarCodigo(codigoNuevo);
+	resultado = Encontrar( root , searchitem );
+	if (resultado){
+	    Type nuevo;
+		nuevo.cargar(cte->id,codigoNuevo,cte->descripcion);
+		memcpy(cte,&nuevo,sizeof(Type));
+	}
 }
+
+template <class Type, int order> void Btree<Type,order>::modificar(Type &searchitem, Type datoNuevo){
+	//bool resultado;
+	//resultado = Encontrar( root , searchitem );
+	//if (resultado){
+	    memcpy(cte,&datoNuevo,sizeof(Type));
+	//}
+}
+
 
 template <class Type, int order> void Btree<Type,order>::insertar(Type &new_entry){
 	Type median;

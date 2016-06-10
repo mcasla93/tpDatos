@@ -97,13 +97,13 @@ void modificacion(ArbolLsm *arbol){
 		cout << "Ingrese ID a modificar" << endl;
 		cout << "Id: ";
 		cin >> id;
-		cout << endl;
 		datoC = arbol->consultarId(id);
 		cout << "ingrese el NUEVO ID: ";
 		cin >> nuevoId;
-		cout << endl;
 
 		nuevoDatoM.cargar(nuevoId, datoC.codigo, datoC.descripcion);
+
+		//arbol->modificar(datoC, nuevoDatoM);
 
 		arbol->eliminar(datoC);
 		arbol->insertar(nuevoDatoM);
@@ -126,13 +126,10 @@ void modificacion(ArbolLsm *arbol){
 		char descripcion[1000];
 		cout<< "ingrese la descripcion:";
 		cin >> descripcion;
-		cout<< endl;
-
 		datoC = arbol->consultarDescripcion(descripcion);
 		char descripcionNueva[1000];
-		cout<< "ingrese la NUEVA descripcion: ";
-		cin>> descripcionNueva;
-		cout << endl;
+		cout << "ingrese la NUEVA descripcion: ";
+		cin >> descripcionNueva;
 
 		nuevoDatoM.cargar(datoC.id, datoC.codigo, descripcionNueva);
 		arbol->modificar(datoC, nuevoDatoM);
@@ -159,10 +156,14 @@ void guardarArbolEnArchivo(string direccionArchivo,ArbolLsm *arbol){
 	arbol->guardarEnArchivo(direccionArchivo);
 }
 
+void mergeVentasxVendedor(){
+
+}
+
 int main(int argc, char *argv[]) {
 	ArbolLsm arbol;
 
-	/*CREACION DEL ARCHIVO PARA PRUEBAS
+	/*//CREACION DEL ARCHIVO PARA PRUEBAS
 	fstream archivo;
 	archivo.open("vendedores.txt",ofstream::out);
 	archivo.close();
@@ -180,7 +181,7 @@ int main(int argc, char *argv[]) {
 	dato.cargar(6,"6","pelu");
 	escritura.write(reinterpret_cast<char *>(&dato),sizeof(struct Dato));
 	escritura.close();
-   */
+	*/
 	if (argc == 1) {
 		//si no pasa ningun parametro al ejecutar
 		imprimirMenuHelp();
@@ -197,7 +198,7 @@ int main(int argc, char *argv[]) {
 		arbol.imprimir();
 		alta(&arbol);
 		arbol.imprimir();
-		guardarArbolEnArchivo(argv[3],&arbol);
+		//guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'b':
 		//BAJA
@@ -205,7 +206,7 @@ int main(int argc, char *argv[]) {
 		arbol.imprimir();
 		baja(&arbol);
 		arbol.imprimir();
-		guardarArbolEnArchivo(argv[3],&arbol);
+		//guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'm':
 		//MODIFICACION
@@ -218,29 +219,62 @@ int main(int argc, char *argv[]) {
 	case 'q':
 		//CONSULTA
 		cargarArbolDesdeArchivo(argv[3],&arbol);
+		arbol.imprimir();
 		char opMenuQ;
 		memcpy(&opMenuQ,&argv[2][0],1);
+		Dato datoC;
+		int id;
+		char codigo[3];
+		char descripcion[1000];
 		switch (opMenuQ){
 			case 'A':
 				//Búsqueda de Vendedor por Identificador
+				cout << "Ingrese el Identificador: ";
+				cin >> id;
+				datoC = arbol.consultarId(id);
+				datoC.imprimir();
 				break;
 			case 'B':
 				// Búsqueda de Vendedor por Nombre
+				cout << "Ingrese Descripcion: ";
+				cin >> descripcion;
+				datoC = arbol.consultarDescripcion(descripcion);
+				datoC.imprimir();
 				break;
 			case 'C':
 				//Búsqueda de Venta por Código de Vendedor
+				cout << "Ingrese Codigo: ";
+				cin >> codigo;
+				datoC = arbol.consultarCodigo(codigo);
+				datoC.imprimir();
 				break;
 			case 'D':
 				//Búsqueda de Venta por Código de Producto
+				cout << "Ingrese Descripcion: ";
+				cin >> descripcion;
+				datoC = arbol.consultarDescripcion(descripcion);
+				datoC.imprimir();
 				break;
 			case 'E':
 				//Búsqueda de Producto por Identificador
+				cout << "Ingrese el Identificador: ";
+				cin >> id;
+				datoC = arbol.consultarId(id);
+				datoC.imprimir();
 				break;
 			case 'F':
 				//Búsqueda de Producto por Nombre
+				cout << "Ingrese Descripcion: ";
+				cin >> descripcion;
+				datoC = arbol.consultarDescripcion(descripcion);
+				datoC.imprimir();
 				break;
 			case 'G':
 				//Búsqueda de Grupo por Identificador
+				cout << "Ingrese el Identificador: ";
+				cin >> id;
+				datoC = arbol.consultarId(id);
+				datoC.imprimir();
 				break;
 			case 'H':
 				//Búsqueda de Vendedor por Identificador, con el índice
@@ -265,6 +299,7 @@ int main(int argc, char *argv[]) {
 				break;
 			case 'O':
 				//Informe: Listado de ventas por Vendedor.
+				mergeVentasxVendedor();
 				break;
 			case 'P':
 				//Informe: Ahorro de espacio por compresión
