@@ -25,6 +25,7 @@ public:
 	Dato consultarCodigo(char codigoAConsultar[3]);
 	Dato consultarDescripcion(char descripcionAConsultar[1000]);
 	void guardarEnArchivo(string direccionArchivo);
+	void guardarEnDisco();
 	bool memoriaLlena();
 
 	void imprimir();

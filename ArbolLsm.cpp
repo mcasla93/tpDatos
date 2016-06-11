@@ -13,35 +13,33 @@
 ArbolLsm::ArbolLsm() {
 }
 
+void ArbolLsm::guardarEnDisco(){
+	this->c0.guardarEnArchivo(c1.rutaArchivo());
+	c0.vaciar();
+}
+
 void ArbolLsm::insertar(Dato datoAInsertar) {
 	if (!this->c0.insertar(datoAInsertar))
-		//this->guardarEnArchivo();
+		this->guardarEnDisco();
+}
 
-    if (!this->c1.insertar(datoAInsertar)){ // creeria q este se va
 
-
+void ArbolLsm::eliminar(Dato datoAEliminar) {
+	if (!this->c0.eliminar(datoAEliminar)) {
+		this->c1.eliminar(datoAEliminar);
 	}
 }
 
-void ArbolLsm::eliminar(Dato datoAEliminar) {
-	//if (!this->c0.eliminar(datoAEliminar)) {
-		if (!this->c1.eliminar(datoAEliminar)){
-			//si entra aca es xq no existe el dato a borrar
-		}
-	//}
-}
-
 void ArbolLsm::modificar(Dato datoActual, Dato datoNuevo) {
-	//if (!this->c0.modificar(datoActual,datoNuevo)) {
-		if (!this->c1.modificar(datoActual,datoNuevo)){
-			//si entra aca es xq no existe el dato a borrar
-		}
-	//}
+	if (!this->c0.modificar(datoActual,datoNuevo)) {
+		this->c1.modificar(datoActual,datoNuevo);
+	}
 
 }
 
 Dato ArbolLsm::consultarId(int idAConsultar) {
 	Dato datoConsultado;
+	datoConsultado.cargar(-1,"-1","NULL");
 	if (!this->c0.consultarId(idAConsultar,&datoConsultado)) {
 		if (!this->c1.consultarId(idAConsultar,&datoConsultado)){
 			//si entra aca es xq no existe el dato a consultar me oiste
@@ -52,6 +50,7 @@ Dato ArbolLsm::consultarId(int idAConsultar) {
 
 Dato ArbolLsm::consultarCodigo(char codigoAConsultar[3]) {
 	Dato datoConsultado;
+	datoConsultado.cargar(-1,"-1","NULL");
 	if (!this->c0.consultarCodigo(codigoAConsultar,&datoConsultado)) {
 		if (!this->c1.consultarCodigo(codigoAConsultar,&datoConsultado)){
 			//si entra aca es xq no existe el dato a consultar
@@ -62,6 +61,7 @@ Dato ArbolLsm::consultarCodigo(char codigoAConsultar[3]) {
 
 Dato ArbolLsm::consultarDescripcion(char descripcionAConsultar[1000]) {
 	Dato datoConsultado;
+	datoConsultado.cargar(-1,"-1","NULL");
 	if (!this->c0.consultarDescripcion(descripcionAConsultar,&datoConsultado)) {
 		if (!this->c1.consultarDescripcion(descripcionAConsultar,&datoConsultado)){
 			//si entra aca es xq no existe el dato a consultar
@@ -83,7 +83,7 @@ bool ArbolLsm::memoriaLlena(){
 void ArbolLsm::guardarEnArchivo(string direccionArchivo){
 	//solo guardo el arbolb dsps hay q adaptar el del archivo
 	c0.guardarEnArchivo(direccionArchivo);
-	c0.resetearContador();
+	c1.guardarEnArchivo(direccionArchivo);
 }
 
 ArbolLsm::~ArbolLsm() {

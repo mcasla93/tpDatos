@@ -8,10 +8,10 @@
 #include "MemArbol.h"
 
 MemArbol::MemArbol() {
+	limiteMemoria = 0;
 }
 
 bool MemArbol::insertar(Dato datoAInsertar) {
-
 	  this->arbol.insertar(datoAInsertar);
 	  this->limiteMemoria++;
 	  if (this->memoriaLlena()){
@@ -21,14 +21,11 @@ bool MemArbol::insertar(Dato datoAInsertar) {
 }
 
 bool MemArbol::eliminar(Dato datoAEliminar) {
-	this->arbol.remover(datoAEliminar);
-	return true;
+	return this->arbol.remover(datoAEliminar);
 }
 
 bool MemArbol::modificar(Dato datoActual, Dato datoNuevo) {
-	this->arbol.modificar(datoActual, datoNuevo);
-
-	return true;
+	return this->arbol.modificar(datoActual, datoNuevo);
 }
 
 bool MemArbol::consultarId(int idAConsultar, Dato* datoConsultado) {
@@ -48,17 +45,18 @@ void MemArbol::imprimir() {
 }
 
 bool MemArbol::memoriaLlena(){
-    if (this->limiteMemoria==20)
-      return true;
+	if (this->limiteMemoria==4)
+    	return true;
     return false;
-}
-
-void MemArbol::resetearContador(){
-    limiteMemoria=0;
 }
 
 void MemArbol::guardarEnArchivo(string direccionArchivo){
 	arbol.guardarEnArchivo(direccionArchivo);
+	limiteMemoria=0;
+}
+
+void MemArbol::vaciar(){
+	arbol.vaciar();
 }
 
 MemArbol::~MemArbol() {

@@ -159,6 +159,28 @@ void DiskArbol::imprimir() {
 	lectura.close();
 }
 
+void DiskArbol::guardarEnArchivo(string direccionArchivo){
+	ifstream lectura(RUTAARCHIVO.c_str(),ios::in | ios::binary);
+	ofstream escritura(direccionArchivo.c_str(),ios::app);
+
+	while(!lectura.eof()) {
+		Dato dato;
+		lectura.read(reinterpret_cast<char *>(&dato),sizeof(Dato));
+
+		if(lectura.eof())
+			break;
+
+		escritura.write(reinterpret_cast<char *>(&dato),sizeof(Dato));
+	}
+
+	escritura.close();
+	lectura.close();
+}
+
+string DiskArbol::rutaArchivo(){
+	return RUTAARCHIVO.c_str();
+}
+
 DiskArbol::~DiskArbol() {
 	// TODO Auto-generated destructor stub
 }

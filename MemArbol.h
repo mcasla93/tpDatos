@@ -31,6 +31,7 @@ public:
 	bool memoriaLlena();
 	void resetearContador();
 	void guardarEnArchivo(string direccionArchivo);
+	void vaciar();
 	virtual ~MemArbol();
 };
 

@@ -38,7 +38,7 @@ public: // publics.
 	void modificarId( Type &searchitem, int idNuevo);
 	void modificarDescripcion( Type &searchitem, char descripcionNueva[1000]);
 	void modificarCodigo(Type &searchitem, char codigoNuevo[3]);
-	void modificar(Type &searchitem, Type datoNuevo);
+	bool modificar(Type &searchitem, Type datoNuevo);
 	void insertar(Type &new_entry);
 	void insertarEnRecursion( B_node<Type, order> *current, Type &new_entry,Type &median,B_node<Type, order> * &rightchilds , bool &result );
 	void insertarEnNodo(B_node<Type, order> *current, const Type &entry, B_node<Type, order> *rightchilds, int position);
@@ -46,8 +46,8 @@ public: // publics.
 		B_node<Type, order> * &right_half,   Type &median);
 	// eliminacion
 
-	void remover( Type &target );
-	void removerEnRecursion( B_node<Type, order> *current, Type &target );
+	bool remover( Type &target );
+	bool removerEnRecursion( B_node<Type, order> *current, Type &target );
 	void removerDato(  B_node<Type, order> *current, int position  );
 	void copiarDePredecesor(  B_node<Type, order> *current, int position );
 	// funciones para restaurar despues de la eliminacion
@@ -59,6 +59,8 @@ public: // publics.
 	void imprimirArbol( B_node<Type, order> *current );
 
 	void guardarEnArchivo(string direccionArchivo);
+
+	void vaciar();
 };
 
 template <class Type, int order> Btree<Type,order>::Btree(){
@@ -137,6 +139,7 @@ template <class Type, int order> bool Btree<Type,order>::EncontrarCodigo(B_node<
 			EncontrarCodigo(current->childs[i + 1],codigoConsultado,datoConsultado);
 		}
 	}
+	return result;
 }
 
 template <class Type, int order> bool Btree<Type,order>::EncontrarDescripcion(B_node<Type,order> *current, char descripcionConsultada[1000],Type *datoConsultado){
@@ -205,12 +208,11 @@ template <class Type, int order> void Btree<Type,order>::modificarCodigo( Type &
 	}
 }
 
-template <class Type, int order> void Btree<Type,order>::modificar(Type &searchitem, Type datoNuevo){
-	//bool resultado;
-	//resultado = Encontrar( root , searchitem );
-	//if (resultado){
-	    memcpy(cte,&datoNuevo,sizeof(Type));
-	//}
+template <class Type, int order> bool Btree<Type,order>::modificar(Type &searchitem, Type datoNuevo){
+	if (cte==NULL) return false;
+
+	memcpy(cte,&datoNuevo,sizeof(Type));
+	return true;
 }
 
 
@@ -242,8 +244,7 @@ template <class Type, int order> void Btree<Type,order>::insertarEnRecursion( B_
 		else { 
 			bool fl = buscarEnNodo(current, new_entry, position);
 			if ( fl ){
-				cout<<"Item duplicado\n"; 
-			    result = false; 
+				result = false;
 				return; 
 			}
 			else {
@@ -304,33 +305,29 @@ template <class Type, int order> void Btree<Type,order>::dividirNodo( B_node<Typ
 		current->count--;
 }
 
-template <class Type, int order> void Btree<Type,order>::remover( Type &target ){
-
-	removerEnRecursion( root , target );
+template <class Type, int order> bool Btree<Type,order>::remover( Type &target ){
+	bool result;
+	result = removerEnRecursion( root , target );
 	if( root != NULL && root->count == 0 ){
 		B_node<Type, order> *delete_root = root;
 		root = root->childs[0];
 		delete delete_root;
 	}
+	return result;
 }
 
-template <class Type, int order> void Btree<Type,order>::removerEnRecursion( B_node<Type, order> *current, Type &target ){
-
+template <class Type, int order> bool Btree<Type,order>::removerEnRecursion( B_node<Type, order> *current, Type &target ){
+	bool result = false;
 	int position;
-	if( current == NULL ){
-		cout << "item no encontrado.\n";
-		return;
-	}
-	else{
+	if( current != NULL ){
 		bool fl = buscarEnNodo( current , target ,position );
 		if( fl ){
-
-			if( current->childs[position] != NULL ){
+			if(current->childs[position] != NULL ){
 				copiarDePredecesor( current , position );
 				removerEnRecursion( current->childs[position], current->data[position]);
 			}else
 				removerDato( current , position );
-
+			result = true;
 		}else
 			removerEnRecursion( current->childs[position], target );
 
@@ -338,6 +335,7 @@ template <class Type, int order> void Btree<Type,order>::removerEnRecursion( B_n
 			if( current->childs[position]->NodeEmpty() )
 				restaurar( current , position );
 	}
+	return result;
 }
 
 template <class Type, int order> void Btree<Type,order>::removerDato(  B_node<Type, order> *current, int position  ){
@@ -478,6 +476,11 @@ template <class Type, int order> void Btree<Type,order>::guardarEnArchivo(string
 	ofstream escritura(direccionArchivo.c_str(),ios::app);
 	guardarInorder(root,&escritura);
 	escritura.close();
+}
+
+template <class Type, int order> void Btree<Type,order>::vaciar(){
+	root = NULL;
+	cte = NULL;
 }
 
 #endif
