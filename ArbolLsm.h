@@ -26,6 +26,7 @@ public:
 	Dato consultarDescripcion(char descripcionAConsultar[1000]);
 	void guardarEnArchivo(string direccionArchivo);
 	bool memoriaLlena();
+
 	void imprimir();
 	virtual ~ArbolLsm();
 };
