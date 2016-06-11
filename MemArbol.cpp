@@ -45,7 +45,7 @@ void MemArbol::imprimir() {
 }
 
 bool MemArbol::memoriaLlena(){
-	if (this->limiteMemoria==4)
+	if (this->limiteMemoria==4) //4 para probar rapido el paso a disco
     	return true;
     return false;
 }

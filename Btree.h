@@ -441,7 +441,6 @@ template <class Type, int order> void Btree<Type,order>::imprimirArbol( B_node<T
 	if(!current) 
 		return; 
 	static int k = 1;
-	cout << k <<" ";
 	current->mostrarNodo(); 
 	k++;
 	for( i=0; i<= current->count ;i++) 
@@ -449,13 +448,10 @@ template <class Type, int order> void Btree<Type,order>::imprimirArbol( B_node<T
 }
 
 template <class Type, int order> void Btree<Type,order>::mostrarArbol(){
-	
-	if ( root == NULL ) 
-		cout << "BTree is empty..." << endl;
-	else{ 
-		cout <<"PAG\tKeys Nodo\n";
+
+	if ( root != NULL )
 		imprimirArbol( root );
-	} 
+
 }
 
 template <class Type, int order> void Btree<Type,order>::guardarInorder(B_node<Type, order> *current, ofstream *escritura) {

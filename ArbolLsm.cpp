@@ -71,8 +71,11 @@ Dato ArbolLsm::consultarDescripcion(char descripcionAConsultar[1000]) {
 }
 
 void ArbolLsm::imprimir() {
+	cout << "Datos arbol memoria" << endl;
 	c0.imprimir();
+	cout << "Datos arbol disco" << endl;
 	c1.imprimir();
+	cout << endl;
 }
 
 bool ArbolLsm::memoriaLlena(){
@@ -81,7 +84,6 @@ bool ArbolLsm::memoriaLlena(){
 
 
 void ArbolLsm::guardarEnArchivo(string direccionArchivo){
-	//solo guardo el arbolb dsps hay q adaptar el del archivo
 	c0.guardarEnArchivo(direccionArchivo);
 	c1.guardarEnArchivo(direccionArchivo);
 }

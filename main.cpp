@@ -13,19 +13,19 @@ using namespace std;
 
 void imprimirMenuHelp(){
 	cout << " **** ­Comandos ****" << endl;
-	cout << "­ a vendedores [path al archivo] Para dar de alta en Vendedores" << endl;
-	cout << " ­a ventas [path al archivo] Para dar de alta en Ventas" << endl;
-	cout << " ­a productos [path al archivo] Para dar de alta en Productos" << endl;
-	cout << " ­a grupos [path al archivo] Para dar de alta en Grupos" << endl;
-	cout << " ­b vendedores [path al archivo] Para dar de baja en Vendedores" << endl;
-	cout << " ­b ventas [path al archivo] Para dar de baja en Ventas" << endl;
-	cout << " ­b productos [path al archivo] Para dar de baja en Productos" << endl;
-	cout << " ­b grupos [path al archivo] Para dar de baja en Grupos" << endl;
-	cout << " ­m vendedores [path al archivo] Para modificar en Vendedores" << endl;
-	cout << " ­m ventas [path al archivo] Para modificar en Ventas" << endl;
-	cout << " ­m productos [path al archivo] Para modificar en Productos" << endl;
-	cout << " ­m grupos [path al archivo] Para modificar en Grupos" << endl;
-	cout << " ­q [Cod Consulta] [­f path al archivo] Para realizar una consulta" << endl;
+	cout << "­ -a vendedores [path al archivo] Para dar de alta en Vendedores" << endl;
+	cout << " ­-a ventas [path al archivo] Para dar de alta en Ventas" << endl;
+	cout << " ­-a productos [path al archivo] Para dar de alta en Productos" << endl;
+	cout << " ­-a grupos [path al archivo] Para dar de alta en Grupos" << endl;
+	cout << " ­-b vendedores [path al archivo] Para dar de baja en Vendedores" << endl;
+	cout << " ­-b ventas [path al archivo] Para dar de baja en Ventas" << endl;
+	cout << " ­-b productos [path al archivo] Para dar de baja en Productos" << endl;
+	cout << " ­-b grupos [path al archivo] Para dar de baja en Grupos" << endl;
+	cout << " ­-m vendedores [path al archivo] Para modificar en Vendedores" << endl;
+	cout << " ­-m ventas [path al archivo] Para modificar en Ventas" << endl;
+	cout << " ­-m productos [path al archivo] Para modificar en Productos" << endl;
+	cout << " ­-m grupos [path al archivo] Para modificar en Grupos" << endl;
+	cout << " ­-q [Cod Consulta] [­f path al archivo] Para realizar una consulta" << endl;
 	cout << " **** ­Codigos de Consulta ****" << endl;
 	cout << " ­A Búsqueda de Vendedor por Identificador." << endl;
 	cout << " ­B Búsqueda de Vendedor por Nombre." << endl;
@@ -182,7 +182,6 @@ int main(int argc, char *argv[]) {
 		cargarArbolDesdeArchivo(argv[3],&arbol);
 		arbol.imprimir();
 		alta(&arbol);
-		arbol.imprimir();
 		guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'b':
@@ -190,7 +189,6 @@ int main(int argc, char *argv[]) {
 		cargarArbolDesdeArchivo(argv[3],&arbol);
 		arbol.imprimir();
 		baja(&arbol);
-		arbol.imprimir();
 		guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'm':
@@ -198,7 +196,6 @@ int main(int argc, char *argv[]) {
 		cargarArbolDesdeArchivo(argv[3],&arbol);
 		arbol.imprimir();
 		modificacion(&arbol);
-		arbol.imprimir();
 		guardarArbolEnArchivo(argv[3],&arbol);
 		break;
 	case 'q':
