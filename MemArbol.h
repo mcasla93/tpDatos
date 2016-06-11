@@ -18,6 +18,7 @@ using namespace std;
 class MemArbol {
 private:
 	Btree<Dato,5> arbol;
+	int limiteMemoria;
 public:
 	MemArbol();
 	bool insertar(Dato datoAInsertar);
@@ -27,6 +28,8 @@ public:
 	bool consultarCodigo(char codigoAConsultar[3], Dato *datoConsultado);
 	bool consultarDescripcion(char descripcionAConsultar[1000], Dato *datoConsultado);
 	void imprimir();
+	bool memoriaLlena();
+	void resetearContador();
 	void guardarEnArchivo(string direccionArchivo);
 	virtual ~MemArbol();
 };

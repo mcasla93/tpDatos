@@ -11,8 +11,13 @@ MemArbol::MemArbol() {
 }
 
 bool MemArbol::insertar(Dato datoAInsertar) {
-	this->arbol.insertar(datoAInsertar);
-	return true;
+
+	  this->arbol.insertar(datoAInsertar);
+	  this->limiteMemoria++;
+	  if (this->memoriaLlena()){
+		  return false;
+	  }
+	  return true;
 }
 
 bool MemArbol::eliminar(Dato datoAEliminar) {
@@ -40,6 +45,16 @@ bool MemArbol::consultarDescripcion(char descripcionAConsultar[1000], Dato* dato
 
 void MemArbol::imprimir() {
 	this->arbol.mostrarArbol();
+}
+
+bool MemArbol::memoriaLlena(){
+    if (this->limiteMemoria==20)
+      return true;
+    return false;
+}
+
+void MemArbol::resetearContador(){
+    limiteMemoria=0;
 }
 
 void MemArbol::guardarEnArchivo(string direccionArchivo){

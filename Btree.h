@@ -81,8 +81,6 @@ template <class Type, int order> void Btree<Type,order>::recInorder(B_node<Type,
 	}
 }
 
-
-
 template <class Type, int order> bool Btree<Type,order>::buscarId(int idConsultado, Type *datoConsultado){
 	return EncontrarId( root , idConsultado, datoConsultado );
 }

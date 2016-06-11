@@ -11,12 +11,6 @@
 
 using namespace std;
 
-DiskArbol::DiskArbol() {
-	// CREAR ARCHIVO
-	this->archivo.open(RUTAARCHIVO.c_str(),ofstream::out);
-	this->archivo.close();
-}
-
 bool DiskArbol::insertar(struct Dato datoAInsertar) {
 	ofstream escritura(RUTAARCHIVO.c_str(),ios::app);
 
@@ -25,6 +19,12 @@ bool DiskArbol::insertar(struct Dato datoAInsertar) {
 	escritura.close();
 
 	return true;
+}
+
+DiskArbol::DiskArbol() {
+	// CREAR ARCHIVO
+	this->archivo.open(RUTAARCHIVO.c_str(),ofstream::out);
+	this->archivo.close();
 }
 
 bool DiskArbol::eliminar(Dato datoAEliminar) {
