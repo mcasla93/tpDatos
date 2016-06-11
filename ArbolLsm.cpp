@@ -14,11 +14,13 @@ ArbolLsm::ArbolLsm() {
 }
 
 void ArbolLsm::insertar(Dato datoAInsertar) {
-	//if (!this->c0.insertar(datoAInsertar)) {
-		if (!this->c1.insertar(datoAInsertar)){
-			//si entra aca es xq es dato duplicado
-		}
-	//}
+	if (!this->c0.insertar(datoAInsertar))
+		//this->guardarEnArchivo();
+
+    if (!this->c1.insertar(datoAInsertar)){ // creeria q este se va
+
+
+	}
 }
 
 void ArbolLsm::eliminar(Dato datoAEliminar) {
@@ -52,7 +54,7 @@ Dato ArbolLsm::consultarCodigo(char codigoAConsultar[3]) {
 	Dato datoConsultado;
 	if (!this->c0.consultarCodigo(codigoAConsultar,&datoConsultado)) {
 		if (!this->c1.consultarCodigo(codigoAConsultar,&datoConsultado)){
-			//si entra aca es xq no existe el dato a consultar me oiste
+			//si entra aca es xq no existe el dato a consultar
 		}
 	}
 	return datoConsultado;
@@ -62,7 +64,7 @@ Dato ArbolLsm::consultarDescripcion(char descripcionAConsultar[1000]) {
 	Dato datoConsultado;
 	if (!this->c0.consultarDescripcion(descripcionAConsultar,&datoConsultado)) {
 		if (!this->c1.consultarDescripcion(descripcionAConsultar,&datoConsultado)){
-			//si entra aca es xq no existe el dato a consultar me oiste
+			//si entra aca es xq no existe el dato a consultar
 		}
 	}
 	return datoConsultado;
@@ -73,9 +75,15 @@ void ArbolLsm::imprimir() {
 	c1.imprimir();
 }
 
+bool ArbolLsm::memoriaLlena(){
+    return c0.memoriaLlena();
+}
+
+
 void ArbolLsm::guardarEnArchivo(string direccionArchivo){
 	//solo guardo el arbolb dsps hay q adaptar el del archivo
 	c0.guardarEnArchivo(direccionArchivo);
+	c0.resetearContador();
 }
 
 ArbolLsm::~ArbolLsm() {
